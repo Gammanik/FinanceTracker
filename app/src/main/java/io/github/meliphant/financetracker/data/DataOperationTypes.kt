@@ -7,4 +7,3 @@ enum class Currency {
 enum class OperationType {
     INCOME, OUTCOME
 }
-
