@@ -38,11 +38,17 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
         button_close?.setOnClickListener { _ -> dismiss() }
         //TODO: save info when button_save clicked
 
-        val dataAdapter = ArrayAdapter<String>(context,
+        val dataAdapterCurrency = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, currencyList)
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_currency.adapter = dataAdapter
+        dataAdapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_currency.adapter = dataAdapterCurrency
         spinner_currency.setOnItemSelectedListener(this)
+
+        val dataAdapterCategory = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_item, categoryList)
+        dataAdapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_category.adapter = dataAdapterCategory
+        spinner_category.setOnItemSelectedListener(this)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -57,5 +63,7 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
         val TAG = "NewTransactionDialog"
         //TODO: add currencies API
         private val currencyList = listOf<String>("RUB", "USD")
+        private val categoryList = listOf<String>("Еда & Напитки", "Магазины", "Транспорт",
+                "Развлечения", "Дом", "Медиа","Инвестиции")
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Finance Tracker</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+    <string name="hint_amount">Сумма</string>
+    <string name="outcome">РАСХОД</string>
+    <string name="income">ДОХОД</string>
+    <string name="cash">НАЛИЧНЫЕ</string>
+    <string name="card">КАРТА</string>
+</resources>
