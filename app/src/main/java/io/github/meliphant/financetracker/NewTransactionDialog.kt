@@ -5,10 +5,13 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_layout.*
 
 
-class FullScreenDialog : DialogFragment() {
+class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +34,28 @@ class FullScreenDialog : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         button_close?.setOnClickListener { _ -> dismiss() }
         //TODO: save info when button_save clicked
+
+        val dataAdapter = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_item, currencyList)
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_currency.adapter = dataAdapter
+        spinner_currency.setOnItemSelectedListener(this)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val item = parent?.getItemAtPosition(position).toString()
+        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
     }
 
     companion object {
-        val TAG = "FullScreenDialog"
+        val TAG = "NewTransactionDialog"
+        //TODO: add currencies API
+        private val currencyList = listOf<String>("RUB", "USD")
     }
 }
