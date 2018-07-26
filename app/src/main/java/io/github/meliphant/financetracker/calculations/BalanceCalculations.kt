@@ -35,12 +35,12 @@ object BalanceCalculations {
     private fun getTotalBalance(): Double {
         var totalBalance = 0.00
         for (operationItem in financeList) {
-            totalBalance += getOperationType(operationItem)
+            totalBalance += itemAmountWithSign(operationItem)
         }
         return totalBalance
     }
 
-    private fun getOperationType(operationItem: DataOperation): Double {
+    private fun itemAmountWithSign(operationItem: DataOperation): Double {
         return if (operationItem.operationType == OperationType.INCOME.toString())
             operationItem.amount
         else -operationItem.amount
