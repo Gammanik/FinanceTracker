@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity() {
         showBalance()
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Here should be a popup with adding new line", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val dialog = FullScreenDialog()
+            val ft = supportFragmentManager.beginTransaction()
+            dialog.show(ft, FullScreenDialog.TAG)
         }
     }
 

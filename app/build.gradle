@@ -35,4 +35,5 @@ dependencies {
     testImplementation "junit:junit:$junit"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
+    implementation "com.android.support:support-v4:$support_lib"
 }
