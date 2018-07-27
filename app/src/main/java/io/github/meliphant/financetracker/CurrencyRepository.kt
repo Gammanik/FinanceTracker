@@ -1,11 +1,11 @@
 package io.github.meliphant.financetracker
 
 import io.github.meliphant.financetracker.data.DataCurrencyRates
+import io.reactivex.Observable
 
 class CurrencyRepository(val apiService: CurrencyApi) {
 
-    fun getCurrencies(): io.reactivex.Observable<DataCurrencyRates> {
+    fun getCurrencies(): Observable<DataCurrencyRates> {
         return apiService.loadCurrencies()
     }
 }
-

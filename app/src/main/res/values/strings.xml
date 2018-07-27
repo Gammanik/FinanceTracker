@@ -7,4 +7,5 @@
     <string name="income">INCOME</string>
     <string name="cash">CASH</string>
     <string name="card">CARD</string>
+    <string name="msg_currency_error">Could not update currency rates, please try again.</string>
 </resources>

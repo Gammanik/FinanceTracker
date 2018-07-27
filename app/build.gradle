@@ -28,6 +28,10 @@ def junit = '4.12'
 def support_lib = '27.1.1'
 def espresso = '3.0.2'
 def test_runner = '1.0.2'
+def retrofit = '2.4.0'
+def rxjava = '2.1.8'
+def rxandroid = '2.0.1'
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_lib"
@@ -36,8 +40,9 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
     implementation "com.android.support:support-v4:$support_lib"
-    implementation "com.squareup.retrofit2:retrofit:2.3.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava"
 }
