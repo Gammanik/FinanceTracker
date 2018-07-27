@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker
+package io.github.meliphant.financetracker.ui
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import io.github.meliphant.financetracker.R
 import kotlinx.android.synthetic.main.dialog_layout.*
 
 

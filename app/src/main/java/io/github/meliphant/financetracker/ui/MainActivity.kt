@@ -1,10 +1,11 @@
-package io.github.meliphant.financetracker
+package io.github.meliphant.financetracker.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.calculations.BalanceCalculations.countBalanceForDataSampleRub
 import io.github.meliphant.financetracker.calculations.BalanceCalculations.countBalanceForDataSampleUsd
 import kotlinx.android.synthetic.main.activity_main.*

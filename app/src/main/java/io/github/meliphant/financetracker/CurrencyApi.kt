@@ -1,23 +1,28 @@
 package io.github.meliphant.financetracker
 
 import io.github.meliphant.financetracker.data.DataCurrencyRates
+import io.reactivex.Observable
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface CurrencyApi {
-    @retrofit2.http.GET("api/latest.json")
-    fun loadCurrencies(@retrofit2.http.Query("app_id") app_id: String = "b8fcec806b2747439cf4eb597c456486"): io.reactivex.Observable<DataCurrencyRates>
 
-    /**
-     * Companion object for the factory
-     */
+    @GET(CURRENCY_PATH)
+    fun loadCurrencies(@Query(CURRENCY_QUERY) app_id: String = CURRENCY_API_KEY): Observable<DataCurrencyRates>
+
     companion object Factory {
-        fun create(): io.github.meliphant.financetracker.CurrencyApi {
-            val retrofit = retrofit2.Retrofit.Builder()
-                    .addCallAdapterFactory(retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
-                    .baseUrl("https://openexchangerates.org/")
+        fun create(): CurrencyApi {
+            val retrofit = Retrofit.Builder()
+                    .baseUrl(CURRENCY_HOST)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-            return retrofit.create(io.github.meliphant.financetracker.CurrencyApi::class.java);
+            return retrofit.create(CurrencyApi::class.java);
         }
     }
 }
+

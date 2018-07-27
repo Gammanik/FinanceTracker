@@ -1,9 +1,12 @@
-package io.github.meliphant.financetracker
+package io.github.meliphant.financetracker.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import io.github.meliphant.financetracker.CurrencyRepositoryProvider
+import io.github.meliphant.financetracker.CurrencyRespondResult
+import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.DataCurrencyRates
 import kotlinx.android.synthetic.main.activity_settings.*
 
