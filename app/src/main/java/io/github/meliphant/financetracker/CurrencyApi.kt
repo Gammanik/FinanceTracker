@@ -1,10 +1,10 @@
 package io.github.meliphant.financetracker
 
-import io.github.meliphant.financetracker.data.DataExchangeRates
+import io.github.meliphant.financetracker.data.DataCurrencyRates
 
 interface CurrencyApi {
     @retrofit2.http.GET("api/latest.json")
-    fun search(@retrofit2.http.Query("app_id") app_id: String = "b8fcec806b2747439cf4eb597c456486"): io.reactivex.Observable<DataExchangeRates>
+    fun loadCurrencies(@retrofit2.http.Query("app_id") app_id: String = "b8fcec806b2747439cf4eb597c456486"): io.reactivex.Observable<DataCurrencyRates>
 
     /**
      * Companion object for the factory
