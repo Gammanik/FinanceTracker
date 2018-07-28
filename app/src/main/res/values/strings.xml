@@ -7,5 +7,8 @@
     <string name="income">INCOME</string>
     <string name="cash">CASH</string>
     <string name="card">CARD</string>
+    <string name="settings_currency_title">Currency</string>
+    <string name="settings_currency_summary">Select one custom currency</string>
+    <string name="settings_currency_key">currency</string>
     <string name="msg_currency_error">Could not update currency rates, please try again.</string>
 </resources>
