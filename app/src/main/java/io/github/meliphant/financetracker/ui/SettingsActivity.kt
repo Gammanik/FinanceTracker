@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import io.github.meliphant.financetracker.CurrencyRepositoryProvider
 import io.github.meliphant.financetracker.CurrencyRespondResult
 import io.github.meliphant.financetracker.R
@@ -22,6 +23,8 @@ class SettingsActivity : AppCompatActivity(), CurrencyRespondResult {
 
     override fun onCurrencySuccessLoad(currencyRates: DataCurrencyRates) {
         Log.d("DataExchangeRates", "${currencyRates.rates}")
+//        Toast.makeText(this, "DataExchangeRates" + "${currencyRates.rates}", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onCurrencyErrorLoad() {

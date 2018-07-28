@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="24sp"
-            tools:text="RUB" />
+            tools:text="126 000 RUB" />
 
         <TextView
             android:id="@+id/tv_currency_selected"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="24sp"
-            tools:text="USD" />
+            tools:text="2000 USD" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

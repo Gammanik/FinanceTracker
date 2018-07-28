@@ -2,10 +2,20 @@ package io.github.meliphant.financetracker
 
 import io.github.meliphant.financetracker.data.DataCurrencyRates
 import io.reactivex.Observable
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
-class CurrencyRepository(val apiService: CurrencyApi) {
+
+object CurrencyRepository {
 
     fun getCurrencies(): Observable<DataCurrencyRates> {
-        return apiService.loadCurrencies()
+        val retrofit = Retrofit.Builder()
+                .baseUrl(CURRENCY_HOST)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(CurrencyApi::class.java)
+        return service.loadCurrencies()
     }
 }
