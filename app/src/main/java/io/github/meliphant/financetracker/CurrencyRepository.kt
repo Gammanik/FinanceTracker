@@ -1,21 +1,33 @@
 package io.github.meliphant.financetracker
 
-import io.github.meliphant.financetracker.data.DataCurrencyRates
-import io.reactivex.Observable
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import io.github.meliphant.financetracker.network.CurrencyModule
+import io.github.meliphant.financetracker.network.CurrencyRespondResult
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
+class CurrencyRepository {
 
-object CurrencyRepository {
+    private var compositeDisposable: CompositeDisposable? = CompositeDisposable()
+    private var repository1 = CurrencyModule
 
-    fun getCurrencies(): Observable<DataCurrencyRates> {
-        val retrofit = Retrofit.Builder()
-                .baseUrl(CURRENCY_HOST)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        val service = retrofit.create(CurrencyApi::class.java)
-        return service.loadCurrencies()
+    fun onCurrencyLoad(currencyRespondResult: CurrencyRespondResult) {
+
+        if (compositeDisposable?.isDisposed == true) {
+            compositeDisposable?.dispose()
+            compositeDisposable = null
+        }
+
+        compositeDisposable?.add(
+                repository1.getCurrencies()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe({ currencyRates ->
+                            currencyRespondResult.onCurrencySuccessLoad(currencyRates)
+                        }, { error ->
+                            error.printStackTrace()
+                            currencyRespondResult.onCurrencyErrorLoad()
+                        })
+        )
     }
 }
