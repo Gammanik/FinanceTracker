@@ -8,25 +8,28 @@ import android.widget.TextView
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.DataOperation
 
-class TransactionRecyclerAdapter(val transactionList: List<DataOperation>) :
-        RecyclerView.Adapter<TransactionRecyclerAdapter.ViewHolder>() {
+class TransactionListAdapter(val transactionList: List<DataOperation>) :
+        RecyclerView.Adapter<TransactionListAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionRecyclerAdapter.ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.transaction_list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            TransactionListAdapter.ViewHolder {
+
+        val itemView = LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.transaction_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val transaction = transactionList.get(position)
-        holder.tvAmount.setText(transaction.amount.toString())
-        holder.tvAccount.setText(transaction.account)
-        holder.tvTransactionType.setText(transaction.operationType)
-        holder.tvCurrency.setText(transaction.currency)
-        holder.tvCategory.setText(transaction.category)
+        val transaction = transactionList[position]
+        holder.tvAmount.text = transaction.amount.toString()
+        holder.tvAccount.text = transaction.account
+        holder.tvTransactionType.text = transaction.operationType
+        holder.tvCurrency.text = transaction.currency
+        holder.tvCategory.text = transaction.category
     }
 
     override fun getItemCount() = transactionList.size
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvAmount = itemView.findViewById<TextView>(R.id.amount)

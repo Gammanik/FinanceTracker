@@ -35,49 +35,70 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        button_close?.setOnClickListener { _ -> dismiss() }
+        setCurrencyAdapter()
+        setCategoryAdapter()
+        getSelectedAccountItem()
 
+        handleSaveIcon()
+        handleCloseIcon()
+    }
+
+    private fun setCurrencyAdapter() {
         //TODO: show list from shared preferences
         val dataAdapterCurrency = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, currencyList)
         dataAdapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_currency?.adapter = dataAdapterCurrency
-        spinner_currency?.setOnItemSelectedListener(this)
+        spinner_currency?.onItemSelectedListener
+    }
 
+    private fun setCategoryAdapter() {
         val categoryArray = resources.getStringArray(R.array.category)
         val dataAdapterCategory = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, categoryArray)
         dataAdapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_category?.adapter = dataAdapterCategory
-        spinner_category?.setOnItemSelectedListener(this)
+        spinner_category?.onItemSelectedListener
+    }
 
+    private fun getSelectedAccountItem() {
         val accountsArray = resources.getStringArray(R.array.accounts)
-        account_type?.setOnClickedButtonListener { button, _ ->
+        accountType = if (card.isChecked) accountsArray[1]
+        else accountsArray[0]
+    }
 
-            if (button.text == resources.getText(R.string.card)) accountsArray[1]
-            else accountType = accountsArray[0]
-        }
+    private fun handleCloseIcon() {
+        button_close?.setOnClickListener { _ -> dismiss() }
+    }
 
-        if (card.isChecked) accountType = accountsArray[1]
-        else accountType = accountsArray[0]
-
-        val transactionTypeArray = resources.getStringArray(R.array.type)
-        transaction_type_group?.setOnClickedButtonListener { button, _ ->
-            if (button.text == resources.getText(R.string.income)) transactionType = transactionTypeArray[0]
-            else transactionType = transactionTypeArray[1]
-        }
-
-        if (income.isChecked) transactionType = transactionTypeArray[0]
-        else transactionType = transactionTypeArray[1]
-
+    private fun handleSaveIcon() {
         button_save?.setOnClickListener {
             if (!amount.text.isEmpty()) {
+
                 val numAmount = amount.text.toString().toDouble()
+                val currency = spinner_currency.selectedItem.toString()
+                val category = spinner_category.selectedItem.toString()
+                getSelectedTransactionTypeItem()
+
                 val newDataOperation = DataOperation(numAmount, transactionType,
-                        spinner_currency.selectedItem.toString(), spinner_category.selectedItem.toString(), accountType)
+                        currency, category, accountType)
                 transactionList.add(newDataOperation)
+
                 dismiss()
-            } else Snackbar.make(view!!, getString(R.string.transaction_empty_amount_warning), android.R.attr.duration).show()
+            } else {
+                Snackbar.make(view!!, getString(R.string.transaction_empty_amount_warning),
+                        android.R.attr.duration).show()
+            }
+        }
+    }
+
+    private fun getSelectedTransactionTypeItem() {
+        val transactionTypeArray = resources.getStringArray(R.array.type)
+        if (income.isChecked) {
+            transactionType = transactionTypeArray[0]
+        } else {
+            transactionType = transactionTypeArray[1]
+            index = 1
         }
     }
 
@@ -85,18 +106,16 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//        val item = parent?.getItemAtPosition(position).toString()
-//        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
     }
 
     companion object {
-        val TAG = "NewTransactionDialog"
-        //TODO: add currencies API
-        private val currencyList = listOf<String>("RUB", "USD")
-
         // Temporary list with transactions. Use before adding data storage.
         val transactionList = mutableListOf<DataOperation>()
         var transactionType = ""
         var accountType = ""
+        var index = 0
+        const val TAG = "NewTransactionDialog"
+        //TODO: add currencies API
+        private val currencyList = listOf("RUB", "USD")
     }
 }

@@ -16,6 +16,14 @@ class SettingsActivity : AppCompatActivity() {
         addSettingsList()
     }
 
+    private fun addSettingsList() {
+        if (fragmentManager.findFragmentById(android.R.id.content) == null) {
+            fragmentManager.beginTransaction()
+                    .add(android.R.id.content, SettingsFragment())
+                    .commit()
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -23,14 +31,6 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun addSettingsList() {
-        if (fragmentManager.findFragmentById(android.R.id.content) == null) {
-            fragmentManager.beginTransaction()
-                    .add(android.R.id.content, SettingsFragment())
-                    .commit()
         }
     }
 }

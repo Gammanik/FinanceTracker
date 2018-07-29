@@ -3,7 +3,6 @@ package io.github.meliphant.financetracker.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,8 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.github.meliphant.financetracker.R
-import io.github.meliphant.financetracker.calculations.BalanceCalculations.countBalanceForDataSampleRub
-import io.github.meliphant.financetracker.calculations.BalanceCalculations.countBalanceForDataSampleUsd
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -22,41 +19,38 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        showBalance()
+        showInitialBalance()
+        setDataForAccountsList()
+        setTransactionListAdapter()
+        setNewTransactionDialogFabOnClick()
+    }
 
-        fab.setOnClickListener { view ->
-            val dialog = NewTransactionDialog()
-            val ft = supportFragmentManager.beginTransaction()
-            dialog.show(ft, NewTransactionDialog.TAG)
-        }
+    private fun showInitialBalance() {
+        tv_currency_default.text = resources.getString(R.string.zero_balance_default)
+        tv_currency_custom.text = resources.getString(R.string.zero_balance_custom)
+    }
 
-        val dataAdapterAccounts = ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, MainActivity.accountsList)
-        dataAdapterAccounts.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_accounts.adapter = dataAdapterAccounts
-        spinner_accounts.setOnItemSelectedListener(this)
+    private fun setDataForAccountsList() {
+        val accountsArray = resources.getStringArray(R.array.accounts)
+        val accountsDataAdapter = ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, accountsArray)
+        accountsDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_accounts.adapter = accountsDataAdapter
+        spinner_accounts.onItemSelectedListener
+    }
 
-
+    private fun setTransactionListAdapter() {
         recycler_view.setHasFixedSize(true)
-        val adapter = TransactionRecyclerAdapter(NewTransactionDialog.transactionList)
-        recycler_view.setAdapter(adapter)
-        recycler_view.setLayoutManager(LinearLayoutManager(this))
+        TransactionListAdapter(NewTransactionDialog.transactionList)
+        recycler_view.adapter
+        recycler_view.layoutManager
     }
 
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val item = parent?.getItemAtPosition(position).toString()
-        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
-    }
-
-    private fun showBalance() {
-        val totalBalanceInRub = countBalanceForDataSampleRub()
-        val totalBalanceInUsd = countBalanceForDataSampleUsd()
-        tv_currency_default.setText("$totalBalanceInRub RUB")
-        tv_currency_selected.setText("$totalBalanceInUsd USD")
+    private fun setNewTransactionDialogFabOnClick() {
+        fab.setOnClickListener { _ ->
+            val ft = supportFragmentManager.beginTransaction()
+            NewTransactionDialog().show(ft, NewTransactionDialog.TAG)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -66,21 +60,26 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+            navigateToActivity(SettingsActivity::class.java)
             true
         }
         R.id.action_about -> {
-            val intent = Intent(this, AboutActivity::class.java)
-            startActivity(intent)
+            navigateToActivity(AboutActivity::class.java)
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
-    companion object {
-        val TAG = "NewTransactionDialog"
-        //TODO: add currencies API
-        private val accountsList = listOf("All Accounts", "Cash", "Card")
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val item = parent?.getItemAtPosition(position).toString()
+        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
+    }
+
+    private fun navigateToActivity(className: Class<*>?) {
+        val intent = Intent(this, className)
+        startActivity(intent)
     }
 }

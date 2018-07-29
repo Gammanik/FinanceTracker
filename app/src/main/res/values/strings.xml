@@ -14,4 +14,8 @@
     <string name="settings_currency_key">currency</string>
     <string name="transaction_empty_amount_warning">Please fill in the amount.</string>
     <string name="msg_currency_error">Could not update currency rates, please try again.</string>
+    <string name="zero_balance_default">0 USD</string>
+    <string name="zero_balance_custom">0 RUB</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
 </resources>

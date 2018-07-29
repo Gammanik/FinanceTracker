@@ -1,49 +1,36 @@
 package io.github.meliphant.financetracker.calculations
 
-import io.github.meliphant.financetracker.data.Currency
-import io.github.meliphant.financetracker.data.DataOperation
 import io.github.meliphant.financetracker.data.OperationType
+import io.github.meliphant.financetracker.ui.NewTransactionDialog
 
 object BalanceCalculations {
 
-    private val financeList = ArrayList<DataOperation>()
     private val currencyRate = 63.00
-
-    init {
-        financeList.add(DataOperation(1000.0, OperationType.INCOME.toString(),
-                Currency.USD.toString(), "Category", "Cash"))
-        financeList.add(DataOperation(500.00, OperationType.OUTCOME.toString(),
-                Currency.USD.toString(), "Category", "Cash"))
-        financeList.add(DataOperation(500.00, OperationType.INCOME.toString(),
-                Currency.USD.toString(), "Category", "Cash"))
-        financeList.add(DataOperation(3000.00, OperationType.OUTCOME.toString(),
-                Currency.RUB.toString(), "Category", "Cash"))
-    }
 
     /** Пересчет валюты происходит для total суммы, так как каждое новое добаленное поле
     будет сразу единовременно конвертироваться в дефолтную валюту - рубли и храниться в рублях.
      */
-    fun countBalanceForDataSampleRub(): Double {
-        val totalBalance = getTotalBalance()
+
+    fun countBalanceForDataSampleRub(operationTypeIndex: Int): Double {
+        val totalBalance = getTotalBalance(operationTypeIndex)
         return getDefaultCurrency(totalBalance, currencyRate)
     }
 
-    fun countBalanceForDataSampleUsd(): Double {
-        return getTotalBalance()
+    fun countBalanceForDataSampleUsd(operationTypeIndex: Int): Double {
+        return getTotalBalance(operationTypeIndex)
     }
 
-    private fun getTotalBalance(): Double {
+    private fun getTotalBalance(operationTypeIndex: Int): Double {
         var totalBalance = 0.00
-        for (operationItem in financeList) {
-            totalBalance += itemAmountWithSign(operationItem)
+        for (operationItem in NewTransactionDialog.transactionList) {
+            totalBalance += operationItem.amount * itemAmountWithSign(operationTypeIndex)
         }
         return totalBalance
     }
 
-    private fun itemAmountWithSign(operationItem: DataOperation): Double {
-        return if (operationItem.operationType == OperationType.INCOME.toString())
-            operationItem.amount
-        else -operationItem.amount
+    private fun itemAmountWithSign(operationTypeIndex: Int): Byte {
+        return if (operationTypeIndex == OperationType.INCOME.position) 1
+        else -1
     }
 
     private fun getDefaultCurrency(totalBalance: Double, currencyRate: Double): Double {
