@@ -11,13 +11,13 @@ object BalanceCalculations {
 
     init {
         financeList.add(DataOperation(1000.0, OperationType.INCOME.toString(),
-                Currency.USD.toString()))
+                Currency.USD.toString(), "Category", "Cash"))
         financeList.add(DataOperation(500.00, OperationType.OUTCOME.toString(),
-                Currency.USD.toString()))
+                Currency.USD.toString(), "Category", "Cash"))
         financeList.add(DataOperation(500.00, OperationType.INCOME.toString(),
-                Currency.USD.toString()))
+                Currency.USD.toString(), "Category", "Cash"))
         financeList.add(DataOperation(3000.00, OperationType.OUTCOME.toString(),
-                Currency.RUB.toString()))
+                Currency.RUB.toString(), "Category", "Cash"))
     }
 
     /** Пересчет валюты происходит для total суммы, так как каждое новое добаленное поле

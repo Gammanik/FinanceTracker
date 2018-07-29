@@ -19,10 +19,10 @@ class TransactionRecyclerAdapter(val transactionList: List<DataOperation>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val transaction = transactionList.get(position)
         holder.tvAmount.setText(transaction.amount.toString())
-//            holder.tvAccount.setText(transaction.account.toString())
+        holder.tvAccount.setText(transaction.account)
         holder.tvTransactionType.setText(transaction.operationType)
         holder.tvCurrency.setText(transaction.currency)
-//            holder.tvCategory.setText(transaction.category.toString())
+        holder.tvCategory.setText(transaction.category)
     }
 
     override fun getItemCount() = transactionList.size

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/rl_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent">
 
             <ImageButton
                 android:id="@+id/button_close"
@@ -30,8 +31,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_toRightOf="@+id/button_close"
                 android:layout_toLeftOf="@+id/button_save"
+                android:layout_toRightOf="@+id/button_close"
                 app:rrbg_animateTexts_enter="overshoot"
                 app:rrbg_dividerColor="@color/colorAccent"
                 app:rrbg_dividerSize="2dp"
@@ -40,6 +41,7 @@
                 app:rrbg_selectorSize="10dp">
 
                 <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/income"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:rrb_checked="true"
@@ -49,6 +51,7 @@
                     app:rrb_textColor="@android:color/black" />
 
                 <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/outcome"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:rrb_ripple="true"
@@ -65,89 +68,84 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_ok"
                 android:tint="@android:color/white" />
-
         </RelativeLayout>
 
-    </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="0.7"
+                android:hint="@string/hint_amount"
+                android:inputType="numberDecimal" />
 
-        <EditText
-            android:id="@+id/amount"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="3"
-            android:hint="@string/hint_amount"
-            android:inputType="numberDecimal" />
+            <Spinner
+                android:id="@+id/spinner_currency"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="0.3"
+                android:dropDownVerticalOffset="100dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/category_title"
+            android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/spinner_currency"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:dropDownVerticalOffset="100dp" />
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/account_title"
+            android:textSize="16sp" />
+
+        <co.ceryle.radiorealbutton.RadioRealButtonGroup
+            android:id="@+id/account_type"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:rrbg_animateTexts_enter="overshoot"
+            app:rrbg_dividerColor="@color/colorAccent"
+            app:rrbg_dividerSize="2dp"
+            app:rrbg_radius="8dp"
+            app:rrbg_selectorColor="@color/colorAccent"
+            app:rrbg_selectorSize="8dp">
+
+            <co.ceryle.radiorealbutton.RadioRealButton
+                android:id="@+id/cash"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:rrb_checked="true"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@android:color/darker_gray"
+                app:rrb_text="@string/cash"
+                app:rrb_textColor="@android:color/black" />
+
+            <co.ceryle.radiorealbutton.RadioRealButton
+                android:id="@+id/card"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@android:color/darker_gray"
+                app:rrb_text="@string/card"
+                app:rrb_textColor="@android:color/black" />
+        </co.ceryle.radiorealbutton.RadioRealButtonGroup>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/category_title"
-        android:textSize="16sp" />
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:padding="16dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/account_title"
-        android:textSize="16sp" />
-
-    <co.ceryle.radiorealbutton.RadioRealButtonGroup
-        android:id="@+id/group"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:rrbg_animateTexts_enter="overshoot"
-        app:rrbg_dividerColor="@color/colorAccent"
-        app:rrbg_dividerSize="2dp"
-        app:rrbg_radius="8dp"
-        app:rrbg_selectorColor="@color/colorAccent"
-        app:rrbg_selectorSize="8dp">
-
-        <co.ceryle.radiorealbutton.RadioRealButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:rrb_checked="true"
-            app:rrb_ripple="true"
-            app:rrb_rippleColor="@android:color/darker_gray"
-            app:rrb_text="@string/cash"
-            app:rrb_textColor="@android:color/black" />
-
-        <co.ceryle.radiorealbutton.RadioRealButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:rrb_ripple="true"
-            app:rrb_rippleColor="@android:color/darker_gray"
-            app:rrb_text="@string/card"
-            app:rrb_textColor="@android:color/black" />
-    </co.ceryle.radiorealbutton.RadioRealButtonGroup>
-
-    <com.davidmiguel.numberkeyboard.NumberKeyboard xmlns:keyboard="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        keyboard:keyPadding="8dp"
-        keyboard:keyboardType="decimal" />
-</LinearLayout>
+</ScrollView>

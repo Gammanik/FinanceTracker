@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="accounts">
+        <item>CASH</item>
+        <item>CARD</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>Income</item>
+        <item>Outcome</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>Food and Drinks</item>
+        <item>Shopping</item>
+        <item>Transportation</item>
+        <item>Entertainment</item>
+        <item>Housing</item>
+        <item>Media</item>
+        <item>Investments</item>
+        <item>Financial expenses</item>
+    </string-array>
+</resources>

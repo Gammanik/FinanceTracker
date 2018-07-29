@@ -1,13 +1,13 @@
 package io.github.meliphant.financetracker.ui
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.DataOperation
 import kotlinx.android.synthetic.main.dialog_layout.*
@@ -22,11 +22,9 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
 
     override fun onStart() {
         super.onStart()
-
         val width = ViewGroup.LayoutParams.MATCH_PARENT
         val height = ViewGroup.LayoutParams.MATCH_PARENT
-
-        dialog!!.getWindow().setLayout(width, height)
+        dialog!!.window.setLayout(width, height)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,57 +37,66 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
 
         button_close?.setOnClickListener { _ -> dismiss() }
 
-        //TODO: save info when button_save clicked
-        //TODO: add twice button handler. Cash/card or income/outcome
-
-        button_save?.setOnClickListener {
-            if (!amount.text.isEmpty()) {
-                val numAmount = amount.text.toString().toDouble()
-                val newDataOperation = DataOperation(numAmount, "INCOME", spinner_currency.selectedItem.toString())
-                transactionList.add(newDataOperation)
-                dismiss()
-            }
-        }
-
         //TODO: show list from shared preferences
         val dataAdapterCurrency = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, currencyList)
         dataAdapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_currency.adapter = dataAdapterCurrency
-        spinner_currency.setOnItemSelectedListener(this)
+        spinner_currency?.adapter = dataAdapterCurrency
+        spinner_currency?.setOnItemSelectedListener(this)
 
+        val categoryArray = resources.getStringArray(R.array.category)
         val dataAdapterCategory = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, categoryList)
+                android.R.layout.simple_spinner_item, categoryArray)
         dataAdapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_category.adapter = dataAdapterCategory
-        spinner_category.setOnItemSelectedListener(this)
+        spinner_category?.adapter = dataAdapterCategory
+        spinner_category?.setOnItemSelectedListener(this)
 
-        //Account type handling
-        group.setOnClickedButtonListener { button, position ->
-            Toast.makeText(context, "Clicked! Position: $position", Toast.LENGTH_SHORT).show()
+        val accountsArray = resources.getStringArray(R.array.accounts)
+        account_type?.setOnClickedButtonListener { button, _ ->
+
+            if (button.text == resources.getText(R.string.card)) accountsArray[1]
+            else accountType = accountsArray[0]
         }
 
-        //Transaction type handling
-        transaction_type_group.setOnClickedButtonListener { button, position ->
-            Toast.makeText(context, "Clicked! Position: $position", Toast.LENGTH_SHORT).show()
+        if (card.isChecked) accountType = accountsArray[1]
+        else accountType = accountsArray[0]
+
+        val transactionTypeArray = resources.getStringArray(R.array.type)
+        transaction_type_group?.setOnClickedButtonListener { button, _ ->
+            if (button.text == resources.getText(R.string.income)) transactionType = transactionTypeArray[0]
+            else transactionType = transactionTypeArray[1]
         }
 
+        if (income.isChecked) transactionType = transactionTypeArray[0]
+        else transactionType = transactionTypeArray[1]
+
+        button_save?.setOnClickListener {
+            if (!amount.text.isEmpty()) {
+                val numAmount = amount.text.toString().toDouble()
+                val newDataOperation = DataOperation(numAmount, transactionType,
+                        spinner_currency.selectedItem.toString(), spinner_category.selectedItem.toString(), accountType)
+                transactionList.add(newDataOperation)
+                dismiss()
+            } else Snackbar.make(view!!, getString(R.string.transaction_empty_amount_warning), android.R.attr.duration).show()
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val item = parent?.getItemAtPosition(position).toString()
-        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
+//        val item = parent?.getItemAtPosition(position).toString()
+//        Toast.makeText(parent?.context, "Selected: $item", Toast.LENGTH_LONG).show()
     }
 
     companion object {
         val TAG = "NewTransactionDialog"
         //TODO: add currencies API
         private val currencyList = listOf<String>("RUB", "USD")
-        private val categoryList = listOf<String>("Еда & Напитки", "Магазины", "Транспорт",
-                "Развлечения", "Дом", "Медиа", "Инвестиции")
+
+        // Temporary list with transactions. Use before adding data storage.
         val transactionList = mutableListOf<DataOperation>()
+        var transactionType = ""
+        var accountType = ""
     }
 }
