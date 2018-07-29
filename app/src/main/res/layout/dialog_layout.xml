@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light"
@@ -23,19 +24,38 @@
                 android:src="@drawable/ic_close"
                 android:tint="@android:color/white" />
 
-            <Button
-                android:id="@+id/btn_outcome"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+            <co.ceryle.radiorealbutton.RadioRealButtonGroup
+                android:id="@+id/transaction_type_group"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_toRightOf="@+id/button_close"
-                android:text="@string/outcome" />
-
-            <Button
-                android:id="@+id/btn_income"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
                 android:layout_toLeftOf="@+id/button_save"
-                android:text="@string/income" />
+                app:rrbg_animateTexts_enter="overshoot"
+                app:rrbg_dividerColor="@color/colorAccent"
+                app:rrbg_dividerSize="2dp"
+                app:rrbg_radius="8dp"
+                app:rrbg_selectorColor="@color/colorAccent"
+                app:rrbg_selectorSize="10dp">
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:rrb_checked="true"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@android:color/darker_gray"
+                    app:rrb_text="@string/income"
+                    app:rrb_textColor="@android:color/black" />
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@android:color/darker_gray"
+                    app:rrb_text="@string/outcome"
+                    app:rrb_textColor="@android:color/black" />
+            </co.ceryle.radiorealbutton.RadioRealButtonGroup>
 
             <ImageButton
                 android:id="@+id/button_save"
@@ -72,45 +92,58 @@
             android:dropDownVerticalOffset="100dp" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/category_title"
+        android:textSize="16sp" />
+
     <Spinner
         android:id="@+id/spinner_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:padding="16dp"/>
+        android:padding="16dp" />
 
-    <LinearLayout
-        android:id="@+id/rl_transaction_type"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:orientation="horizontal"
-        android:paddingLeft="46dp"
-        android:paddingRight="46dp">
+        android:text="@string/account_title"
+        android:textSize="16sp" />
 
-        <ToggleButton
-            android:id="@+id/btn_cash"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/cash"
-            android:text="@string/cash"
-            android:textOff="@string/cash"
-            android:textOn="@string/cash" />
+    <co.ceryle.radiorealbutton.RadioRealButtonGroup
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:rrbg_animateTexts_enter="overshoot"
+        app:rrbg_dividerColor="@color/colorAccent"
+        app:rrbg_dividerSize="2dp"
+        app:rrbg_radius="8dp"
+        app:rrbg_selectorColor="@color/colorAccent"
+        app:rrbg_selectorSize="8dp">
 
-        <ToggleButton
-            android:id="@+id/btn_card"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/card"
-            android:text="@string/card"
-            android:textOff="@string/card"
-            android:textOn="@string/card" />
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:rrb_checked="true"
+            app:rrb_ripple="true"
+            app:rrb_rippleColor="@android:color/darker_gray"
+            app:rrb_text="@string/cash"
+            app:rrb_textColor="@android:color/black" />
 
-    </LinearLayout>
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:rrb_ripple="true"
+            app:rrb_rippleColor="@android:color/darker_gray"
+            app:rrb_text="@string/card"
+            app:rrb_textColor="@android:color/black" />
+    </co.ceryle.radiorealbutton.RadioRealButtonGroup>
 
     <com.davidmiguel.numberkeyboard.NumberKeyboard xmlns:keyboard="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"

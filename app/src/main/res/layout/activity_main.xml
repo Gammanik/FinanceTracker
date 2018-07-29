@@ -14,12 +14,34 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+    <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tab_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <Spinner
+        android:id="@+id/spinner_accounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="56dp"
+        android:padding="32dp"
+         />
+    <!--<android.support.v4.view.ViewPager-->
+    <!--android:id="@+id/view_pager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    <!--<include layout="@layout/layout_fragment" />-->
     <LinearLayout
+        android:id="@+id/ll_balance"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="bottom|center"
         android:orientation="horizontal"
-        app:layout_anchor="@+id/toolbar"
+        app:layout_anchor="@+id/spinner_accounts"
         app:layout_anchorGravity="bottom">
 
         <TextView
@@ -42,6 +64,16 @@
             android:textSize="24sp"
             tools:text="2000 USD" />
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:layout_gravity="center_horizontal"
+        android:scrollbars="vertical"
+        app:layout_anchor="@+id/ll_balance"
+        app:layout_anchorGravity="bottom"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

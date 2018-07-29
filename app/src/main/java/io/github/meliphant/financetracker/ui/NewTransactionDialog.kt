@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.data.DataOperation
 import kotlinx.android.synthetic.main.dialog_layout.*
 
 
@@ -37,8 +38,20 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
         super.onActivityCreated(savedInstanceState)
 
         button_close?.setOnClickListener { _ -> dismiss() }
-        //TODO: save info when button_save clicked
 
+        //TODO: save info when button_save clicked
+        //TODO: add twice button handler. Cash/card or income/outcome
+
+        button_save?.setOnClickListener {
+            if (!amount.text.isEmpty()) {
+                val numAmount = amount.text.toString().toDouble()
+                val newDataOperation = DataOperation(numAmount, "INCOME", spinner_currency.selectedItem.toString())
+                transactionList.add(newDataOperation)
+                dismiss()
+            }
+        }
+
+        //TODO: show list from shared preferences
         val dataAdapterCurrency = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, currencyList)
         dataAdapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -50,6 +63,17 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
         dataAdapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_category.adapter = dataAdapterCategory
         spinner_category.setOnItemSelectedListener(this)
+
+        //Account type handling
+        group.setOnClickedButtonListener { button, position ->
+            Toast.makeText(context, "Clicked! Position: $position", Toast.LENGTH_SHORT).show()
+        }
+
+        //Transaction type handling
+        transaction_type_group.setOnClickedButtonListener { button, position ->
+            Toast.makeText(context, "Clicked! Position: $position", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -65,6 +89,7 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
         //TODO: add currencies API
         private val currencyList = listOf<String>("RUB", "USD")
         private val categoryList = listOf<String>("Еда & Напитки", "Магазины", "Транспорт",
-                "Развлечения", "Дом", "Медиа","Инвестиции")
+                "Развлечения", "Дом", "Медиа", "Инвестиции")
+        val transactionList = mutableListOf<DataOperation>()
     }
 }
