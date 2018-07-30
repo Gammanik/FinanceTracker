@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui
+package io.github.meliphant.financetracker.ui.transaction
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -12,19 +12,11 @@ import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.DataOperation
 import kotlinx.android.synthetic.main.dialog_layout.*
 
-
 class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.TransactionDialog)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val width = ViewGroup.LayoutParams.MATCH_PARENT
-        val height = ViewGroup.LayoutParams.MATCH_PARENT
-        dialog!!.window.setLayout(width, height)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

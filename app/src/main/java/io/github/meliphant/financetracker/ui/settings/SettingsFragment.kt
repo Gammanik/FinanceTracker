@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui
+package io.github.meliphant.financetracker.ui.settings
 
 import android.R.attr.duration
 import android.content.SharedPreferences
@@ -33,9 +33,9 @@ class SettingsFragment : PreferenceFragment(),
         if (listPreference is ListPreference) {
             //TODO: Here should be loaded the list from currency rates response
             val entries = arrayOf<CharSequence>(Currency.USD.toString(), Currency.RUB.toString())
-            val entryValues = arrayOf<CharSequence>("1", "2")
+            val entryValues = arrayOf<CharSequence>(Currency.USD.toString(), Currency.RUB.toString())
             listPreference.entries = entries
-            listPreference.setDefaultValue("1")
+            listPreference.setDefaultValue(defaultCurrencyValue)
             listPreference.entryValues = entryValues
             listPreference.setDialogTitle(R.string.settings_currency_title)
         }
@@ -67,5 +67,9 @@ class SettingsFragment : PreferenceFragment(),
 
     override fun onCurrencyErrorLoad() {
         Snackbar.make(view, getString(R.string.msg_currency_error), duration).show()
+    }
+
+    companion object {
+        const val defaultCurrencyValue = "1"
     }
 }

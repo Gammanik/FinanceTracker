@@ -1,7 +1,7 @@
 package io.github.meliphant.financetracker.calculations
 
 import io.github.meliphant.financetracker.data.OperationType
-import io.github.meliphant.financetracker.ui.NewTransactionDialog
+import io.github.meliphant.financetracker.ui.transaction.NewTransactionDialog
 
 object BalanceCalculations {
 
