@@ -1,8 +1,9 @@
-package io.github.meliphant.financetracker
+package io.github.meliphant.financetracker.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import io.github.meliphant.financetracker.R
 
 class AboutActivity : AppCompatActivity() {
 

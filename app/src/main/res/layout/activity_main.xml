@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,12 +14,22 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+    <Spinner
+        android:id="@+id/spinner_accounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="56dp"
+        android:padding="32dp" />
+
     <LinearLayout
+        android:id="@+id/ll_balance"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="bottom|center"
         android:orientation="horizontal"
-        app:layout_anchor="@+id/toolbar"
+        app:layout_anchor="@+id/spinner_accounts"
         app:layout_anchorGravity="bottom">
 
         <TextView
@@ -30,18 +40,28 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="24sp"
-            tools:text="RUB" />
+            tools:text="126 000 RUB" />
 
         <TextView
-            android:id="@+id/tv_currency_selected"
+            android:id="@+id/tv_currency_custom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="24sp"
-            tools:text="USD" />
+            tools:text="2000 USD" />
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="?attr/colorPrimary"
+        android:scrollbars="vertical"
+        app:layout_anchor="@+id/ll_balance"
+        app:layout_anchorGravity="bottom" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

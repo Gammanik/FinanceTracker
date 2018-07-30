@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Finance Tracker</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+    <string name="hint_amount">Сумма</string>
+    <string name="outcome">РАСХОД</string>
+    <string name="income">ДОХОД</string>
+    <string name="cash">НАЛИЧНЫЕ</string>
+    <string name="card">КАРТА</string>
+    <string name="settings_currency_title">Валюта</string>
+    <string name="settings_currency_summary">Выьерите одну валюту</string>
+    <string name="settings_currency_key">валюта</string>
+    <string name="msg_currency_error">Не удалось обновить курс валют, пожалуйста, попробуйте еще раз.</string>
+    <string name="account_title">Счет</string>
+    <string name="category_title">Категория</string>
+    <string name="close">Закрыть</string>
+    <string name="save">Сохранить</string>
+    <string name="transaction_empty_amount_warning">Пожалуйста, введи сумму.</string>
+</resources>
