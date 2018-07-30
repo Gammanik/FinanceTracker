@@ -9,7 +9,7 @@
     <string name="cash">НАЛИЧНЫЕ</string>
     <string name="card">КАРТА</string>
     <string name="settings_currency_title">Валюта</string>
-    <string name="settings_currency_summary">Выьерите одну валюту</string>
+    <string name="settings_currency_summary">Выберите одну валюту</string>
     <string name="settings_currency_key">валюта</string>
     <string name="msg_currency_error">Не удалось обновить курс валют, пожалуйста, попробуйте еще раз.</string>
     <string name="account_title">Счет</string>

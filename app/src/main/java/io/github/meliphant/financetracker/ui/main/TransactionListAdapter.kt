@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui
+package io.github.meliphant.financetracker.ui.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ class TransactionListAdapter(val transactionList: List<DataOperation>) :
         RecyclerView.Adapter<TransactionListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            TransactionListAdapter.ViewHolder {
+            ViewHolder {
 
         val itemView = LayoutInflater
                 .from(parent.context)

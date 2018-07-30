@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui
+package io.github.meliphant.financetracker.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.ui.AboutActivity
+import io.github.meliphant.financetracker.ui.transaction.NewTransactionDialog
+import io.github.meliphant.financetracker.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {

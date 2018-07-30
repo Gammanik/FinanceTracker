@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 class CurrencyRepository {
 
     private var compositeDisposable: CompositeDisposable? = CompositeDisposable()
-    private var repository1 = CurrencyModule
+    private var currencyModule = CurrencyModule
 
     fun onCurrencyLoad(currencyRespondResult: CurrencyRespondResult) {
 
@@ -19,7 +19,7 @@ class CurrencyRepository {
         }
 
         compositeDisposable?.add(
-                repository1.getCurrencies()
+                currencyModule.getCurrencies()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe({ currencyRates ->

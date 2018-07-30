@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui
+package io.github.meliphant.financetracker.ui.settings
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

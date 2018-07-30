@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', "CurrencyApiKey", currency_api_key
+        buildConfigField 'String', "CURRENCY_API_KEY", CURRENCY_API_KEY
     }
     buildTypes {
         debug {

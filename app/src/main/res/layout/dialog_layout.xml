@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:id="@+id/rl_app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorAccent">
+            android:background="@color/colorPrimary">
 
             <ImageButton
                 android:id="@+id/button_close"
@@ -22,43 +23,46 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_alignParentStart="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/close"
                 android:src="@drawable/ic_close"
-                android:tint="@android:color/white"
-                android:contentDescription="@string/close" />
+                android:tint="@android:color/white" />
 
             <co.ceryle.radiorealbutton.RadioRealButtonGroup
                 android:id="@+id/transaction_type_group"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="40dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_toLeftOf="@+id/button_save"
                 android:layout_toRightOf="@+id/button_close"
                 app:rrbg_animateTexts_enter="overshoot"
-                app:rrbg_dividerColor="@color/colorAccent"
+                app:rrbg_dividerColor="@android:color/white"
                 app:rrbg_dividerSize="2dp"
-                app:rrbg_radius="8dp"
-                app:rrbg_selectorColor="@color/colorAccent"
-                app:rrbg_selectorSize="10dp">
+                app:rrbg_selectorColor="@android:color/white"
+                app:rrbg_selectorSize="8dp">
 
                 <co.ceryle.radiorealbutton.RadioRealButton
                     android:id="@+id/income"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:rrb_backgroundColor="@color/colorPrimary"
                     app:rrb_checked="true"
                     app:rrb_ripple="true"
                     app:rrb_rippleColor="@android:color/darker_gray"
                     app:rrb_text="@string/income"
-                    app:rrb_textColor="@android:color/black" />
+                    app:rrb_textColor="@android:color/black"
+                    app:rrb_textSize="16sp" />
 
                 <co.ceryle.radiorealbutton.RadioRealButton
                     android:id="@+id/outcome"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:rrb_backgroundColor="@color/colorPrimary"
                     app:rrb_ripple="true"
                     app:rrb_rippleColor="@android:color/darker_gray"
                     app:rrb_text="@string/outcome"
-                    app:rrb_textColor="@android:color/black" />
+                    app:rrb_textColor="@android:color/black"
+                    app:rrb_textSize="16sp" />
             </co.ceryle.radiorealbutton.RadioRealButtonGroup>
 
             <ImageButton
@@ -67,9 +71,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_alignParentEnd="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/save"
                 android:src="@drawable/ic_ok"
-                android:tint="@android:color/white"
-                android:contentDescription="@string/save" />
+                android:tint="@android:color/white" />
         </RelativeLayout>
 
         <LinearLayout
@@ -84,13 +88,16 @@
                 android:layout_height="100dp"
                 android:layout_weight="0.7"
                 android:hint="@string/hint_amount"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:textAlignment="textEnd"
+                android:textSize="48sp" />
 
             <Spinner
                 android:id="@+id/spinner_currency"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="0.3"
+                android:background="@null"
                 android:dropDownVerticalOffset="100dp" />
         </LinearLayout>
 
@@ -108,7 +115,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textAlignment="textStart" />
 
         <TextView
             android:layout_width="match_parent"
@@ -121,6 +129,7 @@
             android:id="@+id/account_type"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:rrbg_animateTexts_enter="overshoot"
@@ -138,7 +147,8 @@
                 app:rrb_ripple="true"
                 app:rrb_rippleColor="@android:color/darker_gray"
                 app:rrb_text="@string/cash"
-                app:rrb_textColor="@android:color/black" />
+                app:rrb_textColor="@android:color/black"
+                app:rrb_textSize="16sp" />
 
             <co.ceryle.radiorealbutton.RadioRealButton
                 android:id="@+id/card"
@@ -147,7 +157,8 @@
                 app:rrb_ripple="true"
                 app:rrb_rippleColor="@android:color/darker_gray"
                 app:rrb_text="@string/card"
-                app:rrb_textColor="@android:color/black" />
+                app:rrb_textColor="@android:color/black"
+                app:rrb_textSize="16sp" />
         </co.ceryle.radiorealbutton.RadioRealButtonGroup>
     </LinearLayout>
 </ScrollView>
