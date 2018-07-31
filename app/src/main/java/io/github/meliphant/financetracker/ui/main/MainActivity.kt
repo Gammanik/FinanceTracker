@@ -3,6 +3,7 @@ package io.github.meliphant.financetracker.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +17,8 @@ import io.github.meliphant.financetracker.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+
+//инстанс анонимного класса, поле = object()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun setTransactionListAdapter() {
         recycler_view.setHasFixedSize(true)
-        TransactionListAdapter(NewTransactionDialog.transactionList)
-        recycler_view.adapter
-        recycler_view.layoutManager
+        val adapter = TransactionListAdapter(NewTransactionDialog.transactionList)
+        recycler_view.setAdapter(adapter)
+        recycler_view.setLayoutManager(LinearLayoutManager(this))
     }
 
     private fun setNewTransactionDialogFabOnClick() {
