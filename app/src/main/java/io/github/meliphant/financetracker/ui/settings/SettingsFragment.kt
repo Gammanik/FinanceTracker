@@ -33,10 +33,10 @@ class SettingsFragment : PreferenceFragment(),
         if (listPreference is ListPreference) {
             //TODO: Here should be loaded the list from currency rates response
             val entries = arrayOf<CharSequence>(Currency.USD.toString(), Currency.RUB.toString())
-            val entryValues = arrayOf<CharSequence>(Currency.USD.toString(), Currency.RUB.toString())
+            val currencyKeySharedPref = arrayOf<CharSequence>(Currency.USD.toString(), Currency.RUB.toString())
             listPreference.entries = entries
             listPreference.setDefaultValue(defaultCurrencyValue)
-            listPreference.entryValues = entryValues
+            listPreference.entryValues = currencyKeySharedPref
             listPreference.setDialogTitle(R.string.settings_currency_title)
         }
     }

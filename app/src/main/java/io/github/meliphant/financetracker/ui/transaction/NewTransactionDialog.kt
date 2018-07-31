@@ -3,6 +3,7 @@ package io.github.meliphant.financetracker.ui.transaction
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.DialogFragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,7 +76,7 @@ class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListene
                 val newDataOperation = DataOperation(numAmount, transactionType,
                         currency, category, accountType)
                 transactionList.add(newDataOperation)
-
+                Log.d(TAG, "transactionList " + transactionList)
                 dismiss()
             } else {
                 Snackbar.make(view!!, getString(R.string.transaction_empty_amount_warning),
