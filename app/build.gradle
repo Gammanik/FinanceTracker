@@ -38,6 +38,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_lib"
     implementation "com.android.support:design:$support_lib"
+    implementation 'com.android.support:support-v4:27.1.1'
     testImplementation "junit:junit:$junit"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
@@ -49,4 +50,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation "com.android.support:recyclerview-v7:$support_lib"
     implementation "com.github.ceryle:RadioRealButton:$custom_radio_buttons"
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 }

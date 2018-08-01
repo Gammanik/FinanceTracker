@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.data
+package io.github.meliphant.financetracker.repository.model
 
 import io.github.meliphant.financetracker.BuildConfig
 

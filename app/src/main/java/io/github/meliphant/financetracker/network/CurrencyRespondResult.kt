@@ -1,6 +1,6 @@
 package io.github.meliphant.financetracker.network
 
-import io.github.meliphant.financetracker.data.DataCurrencyRates
+import io.github.meliphant.financetracker.repository.model.DataCurrencyRates
 
 interface CurrencyRespondResult {
 

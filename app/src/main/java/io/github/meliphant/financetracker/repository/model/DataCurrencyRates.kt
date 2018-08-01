@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.data
+package io.github.meliphant.financetracker.repository.model
 
 data class DataCurrencyRates(val timestamp: Long,
                              val base: String,

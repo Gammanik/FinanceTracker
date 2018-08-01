@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,14 +12,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.repository.TransactionRepository
 import io.github.meliphant.financetracker.ui.AboutActivity
 import io.github.meliphant.financetracker.ui.transaction.NewTransactionDialog
 import io.github.meliphant.financetracker.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-
-//инстанс анонимного класса, поле = object()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setDataForAccountsList()
         setTransactionListAdapter()
         setNewTransactionDialogFabOnClick()
+
+        Log.e("TAG", "got transactions: ${TransactionRepository().getTransactions(0)}")
     }
 
     private fun showInitialBalance() {

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.github.meliphant.financetracker.R
-import io.github.meliphant.financetracker.data.DataOperation
+import io.github.meliphant.financetracker.repository.model.DataOperation
 
 class TransactionListAdapter(val transactionList: List<DataOperation>) :
         RecyclerView.Adapter<TransactionListAdapter.ViewHolder>() {

@@ -10,8 +10,8 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 import io.github.meliphant.financetracker.CurrencyRepository
 import io.github.meliphant.financetracker.R
-import io.github.meliphant.financetracker.data.Currency
-import io.github.meliphant.financetracker.data.DataCurrencyRates
+import io.github.meliphant.financetracker.repository.model.Currency
+import io.github.meliphant.financetracker.repository.model.DataCurrencyRates
 import io.github.meliphant.financetracker.network.CurrencyRespondResult
 
 
