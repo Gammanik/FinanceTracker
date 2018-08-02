@@ -8,14 +8,14 @@ import android.arch.persistence.room.Query
 @Dao
 interface OperationDao {
 
-    @Query("SELECT * FROM operation")
+    @Query("SELECT * FROM idleOperation")
     fun getAll(): List<Operation>
 
-    @Query("DELETE FROM operation")
+    @Query("DELETE FROM idleOperation")
     fun nukeTable()
 
     @Insert
-    fun saveOperation(op: Operation)
+    fun saveOperation(op: idleOperation)
 
 
 }

@@ -11,7 +11,10 @@ import android.view.ViewGroup
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
 import io.github.meliphant.financetracker.data.AppDb
+import io.github.meliphant.financetracker.data.model.Money
 import io.github.meliphant.financetracker.data.model.Operation
+import io.github.meliphant.financetracker.data.model.idleOperation
+import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
 import kotlinx.coroutines.experimental.launch
 
@@ -43,8 +46,16 @@ class AddOperationFragment : Fragment() {
 
         launch {
             Log.e("TAG", "lst ${db.operationDao().getAll()}")
-            db.operationDao().saveOperation(Operation( name = "trTst", amount = 300.0))
-            Log.e("TAG", "lst ${db.operationDao().getAll()}")
+            db.operationDao()
+                    .saveOperation(idleOperation( comment = "trTst",
+                            amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
+                            amountMainCurrency = Money(6000.0/60, MyCurrency.USD)))
+            val opList: List<Operation> = db.operationDao().getAll()
+
+            Log.e("TAG", "lst $opList")
+            Log.e("!Tag", "maincurr:  ${opList.get(0).amountMainCurrency.amount} - ${opList.get(0).amountMainCurrency.currency}")
+
+
         }
 
         super.onViewCreated(view, savedInstanceState)
