@@ -60,6 +60,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVer"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVer"
 
+    def daggerVer = "2.12"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+    implementation "com.google.dagger:dagger:$daggerVer"
+
 }
 kotlin {
     experimental {

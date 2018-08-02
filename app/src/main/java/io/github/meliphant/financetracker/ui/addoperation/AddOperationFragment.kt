@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.ui.addtransaction
+package io.github.meliphant.financetracker.ui.addoperation
 
 
 import android.arch.persistence.room.Room
@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
 import io.github.meliphant.financetracker.data.AppDb
@@ -17,7 +16,7 @@ import io.github.meliphant.financetracker.data.model.utils.OperationType
 import kotlinx.coroutines.experimental.launch
 
 
-class AddTransactionFragment : Fragment() {
+class AddOperationFragment : Fragment() {
     private var walletId: Int = -1
     private var transactionType: String? = null
 
@@ -32,7 +31,10 @@ class AddTransactionFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_add_transaction, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val db = Room.databaseBuilder(
                 context!!,
                 AppDb::class.java,
@@ -45,16 +47,15 @@ class AddTransactionFragment : Fragment() {
             Log.e("TAG", "lst ${db.operationDao().getAll()}")
         }
 
-        return TextView(activity).apply {
-            setText(R.string.hello_blank_fragment)
-        }
+        super.onViewCreated(view, savedInstanceState)
     }
+
 
 
     companion object {
         @JvmStatic
         fun newInstance(walletId: Int, transactionType: OperationType) =
-                AddTransactionFragment().apply {
+                AddOperationFragment().apply {
                     arguments = Bundle().apply {
                         putInt(Keys.KEY_WALLET_ID.name, walletId)
                         putString(Keys.KEY_TRANSACTION_TYPE.name, transactionType.name)

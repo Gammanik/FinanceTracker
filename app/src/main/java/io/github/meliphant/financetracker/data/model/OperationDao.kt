@@ -11,6 +11,9 @@ interface OperationDao {
     @Query("SELECT * FROM operation")
     fun getAll(): List<Operation>
 
+    @Query("DELETE FROM operation")
+    fun nukeTable()
+
     @Insert
     fun saveOperation(op: Operation)
 

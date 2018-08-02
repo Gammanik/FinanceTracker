@@ -21,8 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="right"
             android:hint="@string/hint_enter_amount"
-            android:inputType="number" />
+            android:inputType="number"
+            tools:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_currency_sign"
