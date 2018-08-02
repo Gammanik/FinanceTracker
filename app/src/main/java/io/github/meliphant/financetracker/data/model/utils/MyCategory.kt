@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.repository.model.utils
+package io.github.meliphant.financetracker.data.model.utils
 
 enum class MyCategory {
     Travel {

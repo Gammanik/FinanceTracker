@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -52,4 +51,18 @@ dependencies {
     implementation "com.github.ceryle:RadioRealButton:$custom_radio_buttons"
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    def roomVer = "1.1.1"
+    kapt "android.arch.persistence.room:compiler:$roomVer"
+    implementation "android.arch.persistence.room:runtime:$roomVer"
+
+    def coroutinesVer = "0.24.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVer"
+
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker
+package io.github.meliphant.financetracker.data.repository
 
 import io.github.meliphant.financetracker.network.CurrencyModule
 import io.github.meliphant.financetracker.network.CurrencyRespondResult

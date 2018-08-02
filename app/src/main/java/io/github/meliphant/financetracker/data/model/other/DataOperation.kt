@@ -1,4 +1,4 @@
-package io.github.meliphant.financetracker.repository.model
+package io.github.meliphant.financetracker.data.model.other
 
 data class DataOperation(val amount: Double,
                          val operationType: String,

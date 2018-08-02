@@ -1,7 +1,7 @@
 package io.github.meliphant.financetracker.network
 
-import io.github.meliphant.financetracker.repository.model.CURRENCY_HOST
-import io.github.meliphant.financetracker.repository.model.DataCurrencyRates
+import io.github.meliphant.financetracker.CURRENCY_HOST
+import io.github.meliphant.financetracker.data.model.other.DataCurrencyRates
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

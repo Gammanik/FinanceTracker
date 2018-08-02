@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,10 +11,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.github.meliphant.financetracker.R
-import io.github.meliphant.financetracker.repository.TransactionRepository
+import io.github.meliphant.financetracker.data.model.utils.OperationType
 import io.github.meliphant.financetracker.ui.AboutActivity
-import io.github.meliphant.financetracker.ui.transaction.NewTransactionDialog
+import io.github.meliphant.financetracker.ui.addtransaction.AddTransactionFragment
 import io.github.meliphant.financetracker.ui.settings.SettingsActivity
+import io.github.meliphant.financetracker.ui.transaction.NewTransactionDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setTransactionListAdapter()
         setNewTransactionDialogFabOnClick()
 
-        Log.e("TAG", "got transactions: ${TransactionRepository().getTransactions(0)}")
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fl_main, AddTransactionFragment.newInstance(0, OperationType.INCOME))
+                .commitAllowingStateLoss()
     }
 
     private fun showInitialBalance() {
@@ -50,8 +52,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private fun setTransactionListAdapter() {
         recycler_view.setHasFixedSize(true)
         val adapter = TransactionListAdapter(NewTransactionDialog.transactionList)
-        recycler_view.setAdapter(adapter)
-        recycler_view.setLayoutManager(LinearLayoutManager(this))
+        recycler_view.adapter = adapter
+        recycler_view.layoutManager = LinearLayoutManager(this)
     }
 
     private fun setNewTransactionDialogFabOnClick() {

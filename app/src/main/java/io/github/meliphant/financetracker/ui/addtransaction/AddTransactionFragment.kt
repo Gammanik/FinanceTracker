@@ -1,64 +1,63 @@
 package io.github.meliphant.financetracker.ui.addtransaction
 
 
+import android.arch.persistence.room.Room
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.Keys
+import io.github.meliphant.financetracker.data.AppDb
+import io.github.meliphant.financetracker.data.model.Operation
+import io.github.meliphant.financetracker.data.model.utils.OperationType
+import kotlinx.coroutines.experimental.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddTransactionFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class AddTransactionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var walletId: Int = -1
+    private var transactionType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            walletId = it.getInt(Keys.KEY_WALLET_ID.name)
+            transactionType = it.getString(Keys.KEY_TRANSACTION_TYPE.name)
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val db = Room.databaseBuilder(
+                context!!,
+                AppDb::class.java,
+                "mobileDb").build()
+
+
+        launch {
+            Log.e("TAG", "lst ${db.operationDao().getAll()}")
+            db.operationDao().saveOperation(Operation( name = "trTst", amount = 300.0))
+            Log.e("TAG", "lst ${db.operationDao().getAll()}")
+        }
+
         return TextView(activity).apply {
             setText(R.string.hello_blank_fragment)
         }
-
-
     }
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddTransactionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(walletId: Int, transactionType: OperationType) =
                 AddTransactionFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putInt(Keys.KEY_WALLET_ID.name, walletId)
+                        putString(Keys.KEY_TRANSACTION_TYPE.name, transactionType.name)
                     }
                 }
     }

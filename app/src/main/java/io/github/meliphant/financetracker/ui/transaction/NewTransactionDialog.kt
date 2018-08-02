@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.github.meliphant.financetracker.R
-import io.github.meliphant.financetracker.repository.model.DataOperation
+import io.github.meliphant.financetracker.data.model.other.DataOperation
 import kotlinx.android.synthetic.main.dialog_layout.*
 
 class NewTransactionDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
