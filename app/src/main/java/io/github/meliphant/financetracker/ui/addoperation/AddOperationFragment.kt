@@ -11,9 +11,10 @@ import android.view.ViewGroup
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
 import io.github.meliphant.financetracker.data.AppDb
+import io.github.meliphant.financetracker.data.model.IdleOperation
 import io.github.meliphant.financetracker.data.model.Money
 import io.github.meliphant.financetracker.data.model.Operation
-import io.github.meliphant.financetracker.data.model.idleOperation
+import io.github.meliphant.financetracker.data.model.Wallet
 import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
 import kotlinx.coroutines.experimental.launch
@@ -45,15 +46,26 @@ class AddOperationFragment : Fragment() {
 
 
         launch {
+//            db.operationDao().nukeTable()
+            //only if created
+//            db.walletDao().nukeTable()
+//            db.walletDao().saveWallet(Wallet(walletId = 1, name = "tstWallet1", money =  Money(0.0, MyCurrency.USD), iconUrl = "wl_icon"))
+
+            val walletsList: List<Wallet> = db.walletDao().getWallets()
+            Log.e("TAG", "lst wallets $walletsList")
+
+
+            //add operation
             Log.e("TAG", "lst ${db.operationDao().getAll()}")
             db.operationDao()
-                    .saveOperation(idleOperation( comment = "trTst",
+                    .saveOperation(IdleOperation( comment = "trTst",
                             amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
-                            amountMainCurrency = Money(6000.0/60, MyCurrency.USD)))
-            val opList: List<Operation> = db.operationDao().getAll()
+                            amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
+                            walletId = 1))
 
+            val opList: List<Operation> = db.operationDao().getAll()
             Log.e("TAG", "lst $opList")
-            Log.e("!Tag", "maincurr:  ${opList.get(0).amountMainCurrency.amount} - ${opList.get(0).amountMainCurrency.currency}")
+            Log.e("!Tag", "maincurr:  ${opList[0].amountMainCurrency.amount} - ${opList[0].amountMainCurrency.currency}")
 
 
         }
