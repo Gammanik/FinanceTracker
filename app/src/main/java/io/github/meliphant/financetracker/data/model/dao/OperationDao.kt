@@ -12,6 +12,9 @@ interface OperationDao {
     @Query("SELECT IdleOperation.idleOpId as operationId, IdleOperation.comment, IdleOperation.amountOp_amount, IdleOperation.amountOp_currency, IdleOperation.amountMain_amount, IdleOperation.amountMain_currency, Wallet.* FROM idleOperation INNER JOIN wallet ON idleOperation.walletId = wallet.walletId")
     fun getAll(): List<Operation>
 
+    @Query("SELECT IdleOperation.idleOpId as operationId, IdleOperation.comment, IdleOperation.amountOp_amount, IdleOperation.amountOp_currency, IdleOperation.amountMain_amount, IdleOperation.amountMain_currency, Wallet.* FROM idleOperation INNER JOIN wallet ON idleOperation.walletId = wallet.walletId AND idleOperation.walletId=:wlId")
+    fun getByWalletId(wlId: Int): List<Operation>
+
     @Query("DELETE FROM idleOperation")
     fun nukeTable()
 

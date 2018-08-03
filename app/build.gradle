@@ -13,6 +13,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', "CURRENCY_API_KEY", CURRENCY_API_KEY
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
@@ -64,6 +65,12 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVer"
     implementation "com.google.dagger:dagger:$daggerVer"
 
+    def circleImageViewVer = "2.2.0"
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVer"
+
+    def glideVer="4.7.1"
+    implementation "com.github.bumptech.glide:glide:$glideVer"
+    kapt "com.github.bumptech.glide:compiler:$glideVer"
 }
 kotlin {
     experimental {

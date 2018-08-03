@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -35,4 +36,71 @@
             android:textSize="28sp" />
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_buttons"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_choose_wallet"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop"
+            app:civ_border_color="@color/colorImgBorder"
+            app:civ_border_width="2dp"
+            app:srcCompat="@drawable/wallet_wlcard" />
+        <TextView
+            android:id="@+id/choose_wallet_text"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_choose_wallet"
+            android:layout_marginTop="0dp"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            android:lines="1"
+            android:text="Wallet1" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_choose_date"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/colorImgBorder"
+            app:civ_border_width="2dp"
+            app:srcCompat="@drawable/btn_calendar" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_choose_category"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_alignParentEnd="true"
+            app:civ_border_color="@color/colorImgBorder"
+            app:civ_border_width="2dp"
+            app:srcCompat="@drawable/category_travel" />
+        <TextView
+            android:id="@+id/category_text"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/btn_choose_wallet"
+            android:lines="1"
+            android:text="Other"
+            android:textSize="10sp"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>
