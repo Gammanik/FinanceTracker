@@ -9,6 +9,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
@@ -19,16 +23,26 @@ import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.Wallet
 import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
+import io.github.meliphant.financetracker.di.component
 import kotlinx.android.synthetic.main.fragment_add_transaction.*
 import kotlinx.coroutines.experimental.launch
+import javax.inject.Inject
 
 
-class AddOperationFragment : Fragment() {
+class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
+
+    @Inject
+    @InjectPresenter lateinit var presenter: AddOperationPresenter
+    @ProvidePresenter fun providePresenter() = presenter
+
     private var walletId: Int = -1
     private var transactionType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        activity!!.component.inject(this)
         super.onCreate(savedInstanceState)
+
+
         arguments?.let {
             walletId = it.getInt(Keys.KEY_WALLET_ID.name)
             transactionType = it.getString(Keys.KEY_TRANSACTION_TYPE.name)
@@ -44,33 +58,8 @@ class AddOperationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initIcons()
 
-//        val db = Room.databaseBuilder(
-//                context!!,
-//                AppDb::class.java,
-//                "mobileDb").build()
-
-//        launch {
-////            db.operationDao().nukeTable()
-//            //only if created
-////            db.walletDao().nukeTable()
-////            db.walletDao().saveWallet(Wallet(walletId = 1, name = "tstWallet1", money =  Money(0.0, MyCurrency.USD), iconUrl = "wl_icon"))
-//
-//            val walletsList: List<Wallet> = db.walletDao().getWallets()
-//            Log.e("TAG", "lst wallets $walletsList")
-//
-//
-//            //add operation
-//            Log.e("TAG", "lst ${db.operationDao().getAll()}")
-//            db.operationDao()
-//                    .saveOperation(IdleOperation( comment = "trTst",
-//                            amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
-//                            amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
-//                            walletId = 1))
-//
-//            val opList: List<Operation> = db.operationDao().getAll()
-//            Log.e("TAG", "lst $opList")
-//            Log.e("!Tag", "maincurr:  ${opList[0].amountMainCurrency.amount} - ${opList[0].amountMainCurrency.currency}")
-//        }
+        //todo only of there is such wallet with this walletId
+        presenter.loadWalletById(1)
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -92,6 +81,30 @@ class AddOperationFragment : Fragment() {
 
     private fun getImage(cntxt: Context, imageName: String): Int {
         return cntxt.resources.getIdentifier(imageName, "drawable", cntxt.packageName)
+    }
+
+    override fun onOperationSaved() {
+        Toast.makeText(requireContext(), "OPERATION ADDED!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onWalletLoaded(wallet: Wallet) {
+        btn_save_operation.visibility = View.VISIBLE
+        btn_save_operation.setOnClickListener {
+            val opToSave = IdleOperation( comment = "trToPresenter",
+                    amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
+                    amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
+                    walletId = 1)
+
+            presenter.saveOperation(opToSave)
+        }
+    }
+
+    override fun onWalletLoadedError() {
+        choose_wallet_text.text = getString(R.string.choose_wallet)
+        Glide.with(this)
+                .load(getImage(requireContext(), "ic_add"))
+                .into(btn_choose_wallet)
+        tv_currency_sign.text = "?"
     }
 
     companion object {

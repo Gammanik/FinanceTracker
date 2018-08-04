@@ -20,5 +20,6 @@
 
     <!--add transaction screen-->
     <string name="hint_enter_amount">Сумма</string>
+    <string name="choose_wallet">выберите кошелек</string>
 
 </resources>

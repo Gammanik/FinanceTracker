@@ -71,6 +71,14 @@ dependencies {
     def glideVer="4.7.1"
     implementation "com.github.bumptech.glide:glide:$glideVer"
     kapt "com.github.bumptech.glide:compiler:$glideVer"
+
+    def moxyVer = "1.5.5"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVer"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVer"
+    implementation "com.android.support:appcompat-v7:$support_lib"
+
+    def materialEditTextVer = "2.1.4"
+    implementation "com.rengwuxian.materialedittext:library:$materialEditTextVer"
 }
 kotlin {
     experimental {

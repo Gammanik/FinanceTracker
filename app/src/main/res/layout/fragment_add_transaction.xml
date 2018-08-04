@@ -17,15 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="right"
+            android:gravity="end"
             android:hint="@string/hint_enter_amount"
+            android:textColorHint="@drawable/selector_hint"
             android:inputType="number"
-            tools:textSize="20sp" />
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_baseColor="@color/colorPrimaryDark"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="@string/hint_enter_amount"
+            tools:textSize="30sp" />
 
         <TextView
             android:id="@+id/tv_currency_sign"
@@ -33,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="$"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -44,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,16 +63,17 @@
             app:civ_border_color="@color/colorImgBorder"
             app:civ_border_width="2dp"
             app:srcCompat="@drawable/wallet_wlcard" />
+
         <TextView
             android:id="@+id/choose_wallet_text"
             android:layout_width="@dimen/icon_size"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_choose_wallet"
             android:layout_marginTop="0dp"
-            android:textAlignment="center"
-            android:textSize="10sp"
             android:lines="1"
-            android:text="Wallet1" />
+            android:text="choose wallet"
+            android:textAlignment="center"
+            android:textSize="12sp" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -89,6 +94,7 @@
             app:civ_border_color="@color/colorImgBorder"
             app:civ_border_width="2dp"
             app:srcCompat="@drawable/category_travel" />
+
         <TextView
             android:id="@+id/category_text"
             android:layout_width="@dimen/icon_size"
@@ -97,10 +103,42 @@
             android:layout_below="@+id/btn_choose_wallet"
             android:lines="1"
             android:text="Other"
-            android:textSize="10sp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textSize="12sp" />
 
     </RelativeLayout>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/et_operation_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="comment"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_buttons" />
+
+    <Button
+        android:id="@+id/btn_save_operation"
+        android:layout_width="162dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_rounded_button"
+        android:text="Confirm"
+        android:textColor="@color/colorBtnBorder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_operation_comment" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

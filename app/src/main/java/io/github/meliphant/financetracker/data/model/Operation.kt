@@ -12,7 +12,7 @@ import java.util.*
 
 
 data class Operation(
-        @PrimaryKey(autoGenerate = true) val operationId: Int? = null,
+        @PrimaryKey(autoGenerate = true) val operationId: Int = 0,
         val comment: String? = "",
 
         @Embedded(prefix = "amountOp_") val amountOperationCurrency: Money,

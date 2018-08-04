@@ -14,6 +14,9 @@ interface WalletDao {
     @Query("SELECT * FROM wallet")
     fun getWallets(): List<Wallet>
 
+    @Query("SELECT * FROM wallet WHERE wallet.walletId=:walletId")
+    fun getWalletById(walletId: Int): Wallet
+
     @Query("DELETE FROM wallet")
     fun nukeTable()
 }

@@ -15,7 +15,7 @@ import android.arch.persistence.room.PrimaryKey
         ))]
 )
 data class IdleOperation(
-        @PrimaryKey(autoGenerate = true) val idleOpId: Int? = null,
+        @PrimaryKey(autoGenerate = true) val idleOpId: Int = 0,
         val comment: String,
 
         @Embedded(prefix = "amountOp_") val amountOperationCurrency: Money,
