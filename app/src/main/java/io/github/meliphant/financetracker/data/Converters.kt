@@ -1,7 +1,8 @@
-package io.github.meliphant.financetracker.data.model
+package io.github.meliphant.financetracker.data
 
 import android.arch.persistence.room.TypeConverter
 import io.github.meliphant.financetracker.data.model.utils.MyCurrency
+import io.github.meliphant.financetracker.data.model.utils.OperationType
 import java.util.*
 
 class Converters {
@@ -14,6 +15,16 @@ class Converters {
     @TypeConverter
     fun currencyToOrdinal(currency: MyCurrency?): Int? {
         return currency?.ordinal
+    }
+
+    @TypeConverter
+    fun operationTypeFromOrdinal(value: Int?): OperationType? {
+        return if (value == null) null else OperationType.values()[value]
+    }
+
+    @TypeConverter
+    fun operationTypeToOrdinal(operationType: OperationType?): Int? {
+        return operationType?.ordinal
     }
 
 

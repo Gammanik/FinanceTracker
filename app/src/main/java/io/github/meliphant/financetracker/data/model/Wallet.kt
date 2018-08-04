@@ -8,6 +8,6 @@ import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 @Entity
 data class Wallet(
         @PrimaryKey(autoGenerate = true) val walletId: Int? = null,
-        val name: String,
+        val walletName: String,
         @Embedded val money: Money,
-        val iconUrl: String)
+        val walletIconUrl: String)

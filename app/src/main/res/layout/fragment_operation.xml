@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_marginBottom="1dp"
+    app:cardCornerRadius="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/op_datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="19.09.1996  15:03" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/op_category_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="operation description"
+            app:srcCompat="@drawable/category_travel"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp"/>
+
+        <TextView
+            android:id="@+id/op_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/op_category_img"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="69dp"
+            android:text="some operation"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/op_comment"
+            android:layout_below="@+id/op_comment">
+
+            <ImageView
+                android:id="@+id/wallet_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/wallet_wlcard" />
+
+            <TextView
+                android:id="@+id/wallet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="some bill" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/op_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:text="+ infinity ₽"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

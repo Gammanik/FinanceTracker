@@ -56,7 +56,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initIcons()
+        initUI()
 
         //todo only of there is such wallet with this walletId
         presenter.loadWalletById(1)
@@ -64,12 +64,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun initIcons() {
-        //todo: fetch wallet by id and get all the info from it
-        Glide.with(this)
-                .load(getImage(requireContext(), "wallet_wlcash"))
-                .into(btn_choose_wallet)
-
+    private fun initUI() {
         Glide.with(this)
                 .load(getImage(requireContext(), "btn_calendar"))
                 .into(btn_choose_date)
@@ -89,14 +84,22 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     override fun onWalletLoaded(wallet: Wallet) {
         btn_save_operation.visibility = View.VISIBLE
-        btn_save_operation.setOnClickListener {
-            val opToSave = IdleOperation( comment = "trToPresenter",
-                    amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
-                    amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
-                    walletId = 1)
+        //todo: get all the values from view
+//        btn_save_operation.setOnClickListener {
+//            val opToSave = Operation( comment = "trToPresenter",
+//                    amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
+//                    amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
+//                    walletId = 1, )
 
-            presenter.saveOperation(opToSave)
-        }
+//            presenter.saveOperation(opToSave)
+//        }
+
+        Glide.with(this)
+                .load(getImage(requireContext(), wallet.walletIconUrl))
+                .into(btn_choose_wallet)
+
+        //todo: add for showing the confirm button
+//        et_amount.addTextChangedListener()
     }
 
     override fun onWalletLoadedError() {
