@@ -21,6 +21,9 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
         return  opRepo.getAllOperations()
     }
 
+    fun getOperationsByWaletId(walletId: Int): List<Operation> {
+        return opRepo.getOperations(walletId)
+    }
 
     fun saveWallet(wallet: Wallet) {
         walletRepo.saveWallet(wallet)

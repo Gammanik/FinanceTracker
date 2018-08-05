@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import io.github.meliphant.financetracker.ADD_WALLET_ID
+import io.github.meliphant.financetracker.ALL_WALLETS_ID
 
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.model.Money
@@ -44,8 +46,8 @@ class WalletsFragment : MvpAppCompatFragment(), WalletsView {
     override fun showWallets(wallets: List<Wallet>) {
         val mutableWallets = wallets.toMutableList()
         //todo: count total balance of all wallets here
-        mutableWallets.add(0, Wallet(-1, "all wallets", Money(2000.0, MyCurrency.USD), "wallet_allwallets"))
-        mutableWallets.add(mutableWallets.size, Wallet(-2, "add wallet", Money(0.0, MyCurrency.RUB), "ic_add"))
+        mutableWallets.add(0, Wallet(ALL_WALLETS_ID, "all wallets", Money(2000.0, MyCurrency.USD), "wallet_allwallets"))
+        mutableWallets.add(mutableWallets.size, Wallet(ADD_WALLET_ID, "add wallet", Money(0.0, MyCurrency.RUB), "ic_add"))
 
         view_pager.adapter = WalletPagerAdapter(mutableWallets, childFragmentManager)
         recycler_tab_layout.setUpWithAdapter(WalletRecyclerAdapter(mutableWallets, view_pager))
