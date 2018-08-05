@@ -21,5 +21,4 @@ interface OperationDao {
     @Insert
     fun saveOperation(op: IdleOperation)
 
-
 }

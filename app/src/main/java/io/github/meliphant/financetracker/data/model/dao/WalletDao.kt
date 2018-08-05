@@ -11,6 +11,9 @@ interface WalletDao {
     @Insert
     fun saveWallet(wallet: Wallet)
 
+    @Insert
+    fun saveWalletList(walletList: List<Wallet>)
+
     @Query("SELECT * FROM wallet")
     fun getWallets(): List<Wallet>
 

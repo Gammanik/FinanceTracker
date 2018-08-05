@@ -12,5 +12,5 @@ interface CategoryDao {
     fun saveCategory(myCategory: MyCategory)
 
     @Query("SELECT * FROM mycategory")
-    fun getAllCategories()
+    fun getAllCategories(): List<MyCategory>
 }
