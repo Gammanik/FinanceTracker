@@ -39,6 +39,13 @@ class AddOperationPresenter @Inject constructor(private val interactor: MainInte
                 }
             }
         }
+    }
 
+    fun loadAllWallets() {
+        launch { val wallets = interactor.getAllWallets()
+            launch(UI) {
+                viewState.expandChooseWallets(wallets)
+            }
+        }
     }
 }

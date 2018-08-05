@@ -8,4 +8,5 @@ interface AddOperationView: MvpView {
     fun onOperationSaved()
     fun onWalletLoaded(wallet: Wallet)
     fun onWalletLoadedError()
+    fun expandChooseWallets(list: List<Wallet>)
 }

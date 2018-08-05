@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="75dp"
+    android:layout_height="80dp"
+    android:layout_margin="4dp">
+
+
+    <TextView
+        android:id="@+id/wallet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/wallet_icon"
+        android:layout_centerInParent="true"
+        android:text="~name~"
+        android:textColor="#000"
+        android:textSize="12sp" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/wallet_icon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@color/colorImgBorder"
+        app:civ_border_width="2dp"
+        app:srcCompat="@drawable/wallet_wlcard" />
+
+    <TextView
+        android:id="@+id/wallet_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/wallet_icon"
+        android:layout_centerInParent="true"
+        android:text="infinity$"
+        android:textColor="@color/colorWalletAmount"
+        android:textSize="14sp" />
+
+</RelativeLayout>

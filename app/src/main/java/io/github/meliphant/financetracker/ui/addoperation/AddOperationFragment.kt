@@ -4,19 +4,23 @@ package io.github.meliphant.financetracker.ui.addoperation
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
+import io.github.meliphant.financetracker.ALL_WALLETS_ID
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
 import io.github.meliphant.financetracker.data.model.Wallet
 import io.github.meliphant.financetracker.data.model.utils.OperationType
 import io.github.meliphant.financetracker.di.component
+import io.github.meliphant.financetracker.ui.addoperation.adapter.ChooseWalletAdapter
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import kotlinx.android.synthetic.main.fragment_add_operation.*
 import javax.inject.Inject
@@ -28,13 +32,25 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     @InjectPresenter lateinit var presenter: AddOperationPresenter
     @ProvidePresenter fun providePresenter() = presenter
 
-    private var walletId: Int = -1
+    private var TOGGLE_IS_DOWN: Boolean = false
+
+    private var chooseWalletListener: OnChooseWalletInteractionListener? =
+            object: OnChooseWalletInteractionListener{
+                override fun onChooseWalletInteraction(item: Wallet) {
+                    toggleChooseWallets()
+                    presenter.loadWalletById(item.walletId)
+                    Toast.makeText(context, "wallet chosen: ${item.walletName}", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+    private val chooseWalletAdapter = ChooseWalletAdapter(listOf(), chooseWalletListener)
+
+    private var walletId: Int = ALL_WALLETS_ID
     private var transactionType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         activity!!.component.inject(this)
         super.onCreate(savedInstanceState)
-
 
         arguments?.let {
             walletId = it.getInt(Keys.KEY_WALLET_ID.name)
@@ -50,9 +66,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initUI()
-        //todo only of there is such wallet with this walletId
-        presenter.loadWalletById(1)
-
+        presenter.loadWalletById(walletId)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -72,6 +86,25 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                     .replace(R.id.fl_main, WalletsFragment())
                     .commitAllowingStateLoss()
         })
+        btn_choose_wallet.setOnClickListener({ toggleChooseWallets() })
+        rv_wallets_choose.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        rv_wallets_choose.adapter = chooseWalletAdapter
+    }
+
+    private fun toggleChooseWallets() {
+        if (TOGGLE_IS_DOWN) {
+            TOGGLE_IS_DOWN = false
+            rv_wallets_choose.visibility = View.GONE
+
+        } else {
+            TOGGLE_IS_DOWN = true
+            presenter.loadAllWallets()
+        }
+    }
+
+    override fun expandChooseWallets(list: List<Wallet>) {
+        rv_wallets_choose.visibility = View.VISIBLE
+        chooseWalletAdapter.setData(list)
     }
 
     private fun getImage(cntxt: Context, imageName: String): Int {
@@ -83,6 +116,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     }
 
     override fun onWalletLoaded(wallet: Wallet) {
+        walletId = wallet.walletId
         btn_save_operation.visibility = View.VISIBLE
         //todo: get all the values from view
 //        btn_save_operation.setOnClickListener {
@@ -109,6 +143,15 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                 .load(getImage(requireContext(), "wallet_choose_wallet"))
                 .into(btn_choose_wallet)
         tv_currency_sign.text = "?"
+    }
+
+    interface OnChooseWalletInteractionListener {
+        fun onChooseWalletInteraction(item: Wallet)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        chooseWalletListener = null
     }
 
     companion object {
