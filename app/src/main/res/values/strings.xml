@@ -22,5 +22,4 @@
     <!--add transaction screen-->
     <string name="hint_enter_amount">amount</string>
     <string name="choose_wallet">choose wallet</string>
-
 </resources>

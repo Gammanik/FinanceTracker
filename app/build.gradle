@@ -81,6 +81,9 @@ dependencies {
 
     def materialEditTextVer = "2.1.4"
     implementation "com.rengwuxian.materialedittext:library:$materialEditTextVer"
+
+    def recyclerTabLayoutVer = "1.5.0"
+    implementation "com.nshmura:recyclertablayout:$recyclerTabLayoutVer"
 }
 kotlin {
     experimental {
