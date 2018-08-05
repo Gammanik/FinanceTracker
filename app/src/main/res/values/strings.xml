@@ -20,6 +20,12 @@
     <string name="save">Save</string>
 
     <!--add transaction screen-->
+    <string name="add_operation_screen_name">New operation</string>
     <string name="hint_enter_amount">amount</string>
     <string name="choose_wallet">choose wallet</string>
+
+    <string name="new_income">new income</string>
+    <string name="new_expense">new expense</string>
+
+
 </resources>

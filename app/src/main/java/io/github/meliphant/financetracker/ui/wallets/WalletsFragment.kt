@@ -46,8 +46,10 @@ class WalletsFragment : MvpAppCompatFragment(), WalletsView {
     override fun showWallets(wallets: List<Wallet>) {
         val mutableWallets = wallets.toMutableList()
         //todo: count total balance of all wallets here
-        mutableWallets.add(0, Wallet(ALL_WALLETS_ID, "all wallets", Money(2000.0, MyCurrency.USD), "wallet_allwallets"))
-        mutableWallets.add(mutableWallets.size, Wallet(ADD_WALLET_ID, "add wallet", Money(0.0, MyCurrency.RUB), "ic_add"))
+        mutableWallets.add(0,
+                Wallet(ALL_WALLETS_ID, "all wallets", Money(2000.0, MyCurrency.USD), "wallet_allwallets"))
+        mutableWallets.add(mutableWallets.size,
+                Wallet(ADD_WALLET_ID, "add wallet", Money(0.0, MyCurrency.RUB), "ic_add"))
 
         view_pager.adapter = WalletPagerAdapter(mutableWallets, childFragmentManager)
         recycler_tab_layout.setUpWithAdapter(WalletRecyclerAdapter(mutableWallets, view_pager))

@@ -9,4 +9,8 @@
 
     <color name="colorWalletCard">#177bbd</color>
     <color name="colorWalletAmount">#2f9c36</color>
+
+
+    <color name="fab_text_color">#eaffffff</color>
+    <color name="fab_text_background">#d6000000</color>
 </resources>

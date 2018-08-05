@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rv_operations"
-    android:name="io.github.meliphant.financetracker.ui.operations.OperationListFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.operations.OperationListFragment"
-    tools:listitem="@layout/fragment_operation" />
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_operations"
+        android:name="io.github.meliphant.financetracker.ui.operations.OperationListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:context=".ui.operations.OperationListFragment"
+        tools:listitem="@layout/fragment_operation" />
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/fab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="6dp"
+            app:fab_labelStyle="@style/menu_labels_style"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/cardview_shadow_end_color"
+            app:layout_anchor="@id/rv_operations"
+            app:fab_icon="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_operations"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rv_operations"
+            app:layout_constraintVertical_bias="1.0" >
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_new_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:fab_colorNormal="@color/colorAccent"
+                app:fab_icon="@drawable/ic_add"
+                app:fab_size="mini"
+                app:fab_title="@string/new_income" />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_new_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:fab_colorNormal="@color/colorAccent"
+                app:fab_icon="@drawable/ic_remove"
+                app:fab_size="mini"
+                app:fab_title="@string/new_expense" />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+</android.support.constraint.ConstraintLayout>

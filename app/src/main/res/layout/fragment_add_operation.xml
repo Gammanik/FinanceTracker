@@ -6,16 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_operation_screen_name"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_amount"
@@ -23,12 +40,12 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:hint="@string/hint_enter_amount"
-            android:textColorHint="@drawable/selector_hint"
             android:inputType="number"
-            app:met_primaryColor="@color/colorPrimary"
+            android:textColorHint="@drawable/selector_hint"
             app:met_baseColor="@color/colorPrimaryDark"
             app:met_floatingLabel="highlight"
             app:met_floatingLabelText="@string/hint_enter_amount"
+            app:met_primaryColor="@color/colorPrimary"
             tools:textSize="30sp" />
 
         <TextView
@@ -62,7 +79,7 @@
             android:scaleType="centerCrop"
             app:civ_border_color="@color/colorImgBorder"
             app:civ_border_width="2dp"
-            app:srcCompat="@drawable/wallet_wlcard" />
+            app:srcCompat="@drawable/wallet_choose_wallet" />
 
         <TextView
             android:id="@+id/choose_wallet_text"
@@ -128,11 +145,18 @@
         android:id="@+id/btn_save_operation"
         android:layout_width="44dp"
         android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/shape_rounded_button"
         android:text=">"
         android:textColor="@color/colorBtnBorder"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="38dp" />
+        app:layout_constraintBottom_toTopOf="@+id/rl_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 
