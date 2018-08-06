@@ -1,17 +1,11 @@
 package io.github.meliphant.financetracker.data.repository
 
 
-import android.util.Log
 import io.github.meliphant.financetracker.data.model.IdleOperation
-import io.github.meliphant.financetracker.data.model.Money
 import io.github.meliphant.financetracker.data.model.Operation
-import io.github.meliphant.financetracker.data.model.Wallet
 import io.github.meliphant.financetracker.data.model.dao.OperationDao
 import io.github.meliphant.financetracker.data.model.dao.WalletOperationDao
-import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
 import java.util.*
 import javax.inject.Inject
 
