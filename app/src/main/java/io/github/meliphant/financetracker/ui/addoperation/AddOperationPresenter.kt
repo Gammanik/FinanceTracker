@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import io.github.meliphant.financetracker.data.MainInteractor
 import io.github.meliphant.financetracker.data.model.IdleOperation
+import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.Wallet
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class AddOperationPresenter @Inject constructor(private val interactor: MainInteractor): MvpPresenter<AddOperationView>() {
 
     //todo: add mapper on repository
-    fun saveOperation(op: IdleOperation) {
+    fun saveOperation(op: Operation) {
         launch {
             interactor.saveOperation(op)
             launch(UI) { viewState.onOperationSaved() }

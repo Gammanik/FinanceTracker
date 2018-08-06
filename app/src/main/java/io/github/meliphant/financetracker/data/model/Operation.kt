@@ -10,7 +10,7 @@ import java.util.*
 data class Operation(
         @PrimaryKey(autoGenerate = true) val operationId: Int = 0,
         val type: OperationType,
-        val comment: String? = "",
+        val comment: String = "",
 
         @Embedded(prefix = "amountOp_") val amountOperationCurrency: Money,
         @Embedded(prefix = "amountMain_") val amountMainCurrency: Money,

@@ -17,7 +17,7 @@ class OperationListPresenter @Inject constructor(private val interactor: MainInt
             val opList: List<Operation> = if(walletId == ALL_WALLETS_ID) {
                 interactor.getAllOperations()
             } else {
-                interactor.getOperationsByWaletId(walletId)
+                interactor.getOperationsByWalletId(walletId)
             }
 
             launch(UI) { viewState.showOperationList(opList) }

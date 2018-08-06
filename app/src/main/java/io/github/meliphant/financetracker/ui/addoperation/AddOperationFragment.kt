@@ -23,9 +23,7 @@ import com.bumptech.glide.Glide
 import io.github.meliphant.financetracker.ALL_WALLETS_ID
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.Keys
-import io.github.meliphant.financetracker.data.model.IdleOperation
-import io.github.meliphant.financetracker.data.model.Money
-import io.github.meliphant.financetracker.data.model.Wallet
+import io.github.meliphant.financetracker.data.model.*
 import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
 import io.github.meliphant.financetracker.di.component
@@ -67,7 +65,6 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
             walletId = it.getInt(Keys.KEY_WALLET_ID.name)
             operationType = it.getString(Keys.KEY_TRANSACTION_TYPE.name)
         }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -174,12 +171,12 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     private fun saveOperation() {
         //todo: get category from view
-        val opToSave = IdleOperation(
+        val opToSave = Operation(
                 type = OperationType.valueOf(operationType),
                 comment = et_operation_comment.text.toString(),
                 amountOperationCurrency = Money(et_amount.text.toString().toDouble(), walletInstance.money.currency),
                 amountMainCurrency = Money(0.0, MyCurrency.USD),
-                walletId = walletId, categoryId = 1,
+                wallet = walletInstance, category = MyCategory(1, "groceries", "category_groceries"),
                 datetime = Date()
         )
 

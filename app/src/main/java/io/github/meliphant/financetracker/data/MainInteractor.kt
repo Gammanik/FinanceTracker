@@ -11,7 +11,7 @@ import javax.inject.Inject
 class MainInteractor @Inject constructor(private val opRepo: OperationRepository,
                                          private val walletRepo: WalletRepository) {
 
-    fun saveOperation(op: IdleOperation) {
+    fun saveOperation(op: Operation) {
         Log.e("TAG", "saveOperation called:: ${opRepo.getAllOperations()}")
         opRepo.saveOperation(op)
     }
@@ -21,7 +21,7 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
         return  opRepo.getAllOperations()
     }
 
-    fun getOperationsByWaletId(walletId: Int): List<Operation> {
+    fun getOperationsByWalletId(walletId: Int): List<Operation> {
         return opRepo.getOperations(walletId)
     }
 

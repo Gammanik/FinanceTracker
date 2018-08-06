@@ -10,8 +10,10 @@ import io.github.meliphant.financetracker.data.model.*
 import io.github.meliphant.financetracker.data.model.dao.CategoryDao
 import io.github.meliphant.financetracker.data.model.dao.OperationDao
 import io.github.meliphant.financetracker.data.model.dao.WalletDao
+import io.github.meliphant.financetracker.data.model.dao.WalletOperationDao
 import io.github.meliphant.financetracker.data.model.utils.MyCurrency
 import io.github.meliphant.financetracker.data.model.utils.OperationType
+import io.github.meliphant.financetracker.data.repository.OperationRepository
 import kotlinx.coroutines.experimental.launch
 import java.util.*
 
@@ -21,6 +23,7 @@ abstract class AppDb: RoomDatabase() {
     abstract fun operationDao(): OperationDao
     abstract fun walletDao(): WalletDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun walletOperationDao(): WalletOperationDao
 
 
     companion object {
@@ -56,36 +59,38 @@ abstract class AppDb: RoomDatabase() {
                             getInstance(context).categoryDao().saveCategory(categoryTravel)
 
 
-                            val op1 = IdleOperation( comment = "~trInRUB",
+                            val op1 = Operation( comment = "~trInRUB",
                                     amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
                                     amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
-                                    walletId = wall1.walletId,
+                                    wallet = wall1,
                                     datetime = Date(),
-                                    categoryId = categoryGroceries.categoryId,
+                                    category = categoryGroceries,
                                     type = OperationType.INCOME)
 
-                            val op2 = IdleOperation( comment = "~got my money",
+                            val op2 = Operation( comment = "~got my money",
                                     amountOperationCurrency = Money(7700.0, MyCurrency.USD),
                                     amountMainCurrency = Money(7700.0, MyCurrency.USD),
-                                    walletId = wall2.walletId,
+                                    wallet = wall2,
                                     datetime = Date(),
-                                    categoryId = categoryTravel.categoryId,
+                                    category = categoryTravel,
                                     type = OperationType.INCOME)
 
-                            val op3 = IdleOperation( comment = "~spend some",
+                            val op3 = Operation( comment = "~spend some",
                                     amountOperationCurrency = Money(5300.0, MyCurrency.USD),
                                     amountMainCurrency = Money(5300.0, MyCurrency.USD),
-                                    walletId = wall2.walletId,
+                                    wallet = wall2,
                                     datetime = Date(),
-                                    categoryId = categoryTravel.categoryId,
+                                    category = categoryTravel,
                                     type = OperationType.OUTCOME)
 
+                            val opRepository = OperationRepository(getInstance(context).operationDao(), getInstance(context).walletOperationDao())
+
                             for (i in 0..15)
-                                getInstance(context).operationDao().saveOperation(op1)
+                                opRepository.saveOperation(op1)
 
                             for (i in 0..20) {
-                                getInstance(context).operationDao().saveOperation(op2)
-                                getInstance(context).operationDao().saveOperation(op3)
+                                opRepository.saveOperation(op2)
+                                opRepository.saveOperation(op3)
                             }
                         }
                     }
