@@ -17,4 +17,13 @@
     <string name="close">Закрыть</string>
     <string name="save">Сохранить</string>
     <string name="transaction_empty_amount_warning">Пожалуйста, введи сумму.</string>
+
+    <!--add transaction screen-->
+    <string name="add_operation_screen_name">Новая транзакция</string>
+    <string name="hint_enter_amount">Сумма</string>
+    <string name="choose_wallet">выберите кошелек</string>
+    <string name="repeat_text">Повторять каждые </string>
+    <string name="new_income">новый расход</string>
+    <string name="new_expense">новых доход</string>
+
 </resources>
