@@ -65,7 +65,9 @@ abstract class AppDb: RoomDatabase() {
                                     wallet = wall1,
                                     datetime = Date(),
                                     category = categoryGroceries,
-                                    type = OperationType.INCOME)
+                                    type = OperationType.INCOME,
+                                    isPeriodic = false,
+                                    periodSeconds = 0)
 
                             val op2 = Operation( comment = "~got my money",
                                     amountOperationCurrency = Money(7700.0, MyCurrency.USD),
@@ -73,7 +75,9 @@ abstract class AppDb: RoomDatabase() {
                                     wallet = wall2,
                                     datetime = Date(),
                                     category = categoryTravel,
-                                    type = OperationType.INCOME)
+                                    type = OperationType.INCOME,
+                                    isPeriodic = false,
+                                    periodSeconds = 0)
 
                             val op3 = Operation( comment = "~spend some",
                                     amountOperationCurrency = Money(5300.0, MyCurrency.USD),
@@ -81,7 +85,9 @@ abstract class AppDb: RoomDatabase() {
                                     wallet = wall2,
                                     datetime = Date(),
                                     category = categoryTravel,
-                                    type = OperationType.OUTCOME)
+                                    type = OperationType.OUTCOME,
+                                    isPeriodic = false,
+                                    periodSeconds = 0)
 
                             val opRepository = OperationRepository(getInstance(context).operationDao(), getInstance(context).walletOperationDao())
 

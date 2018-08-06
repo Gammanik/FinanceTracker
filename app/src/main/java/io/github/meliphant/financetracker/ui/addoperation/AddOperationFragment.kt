@@ -171,15 +171,23 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     private fun saveOperation() {
         //todo: get category from view
+        var periodSeconds: Int = 0
+
+        if (et_repeat_days.text != null && et_repeat_days.text.toString() != "") {
+            periodSeconds = et_repeat_days.text.toString().toInt()
+        }
+
+
         val opToSave = Operation(
                 type = OperationType.valueOf(operationType),
                 comment = et_operation_comment.text.toString(),
                 amountOperationCurrency = Money(et_amount.text.toString().toDouble(), walletInstance.money.currency),
                 amountMainCurrency = Money(0.0, MyCurrency.USD),
                 wallet = walletInstance, category = MyCategory(1, "groceries", "category_groceries"),
-                datetime = Date()
+                datetime = Date(),
+                isPeriodic = periodSeconds > 0,
+                periodSeconds = periodSeconds
         )
-
         presenter.saveOperation(opToSave)
     }
 

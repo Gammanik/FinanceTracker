@@ -30,5 +30,7 @@ data class IdleOperation(
         @Embedded(prefix = "amountMain_") val amountMainCurrency: Money,
         val walletId: Int,
         val categoryId: Int,
-        val datetime: Date
+        val datetime: Date,
+        val isPeriodic: Boolean = false,
+        val periodSeconds: Int
 )

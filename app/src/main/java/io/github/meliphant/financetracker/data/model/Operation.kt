@@ -16,5 +16,7 @@ data class Operation(
         @Embedded(prefix = "amountMain_") val amountMainCurrency: Money,
         @Embedded val wallet: Wallet,
         @Embedded val category: MyCategory,
-        val datetime: Date
+        var datetime: Date,
+        val isPeriodic: Boolean = false,
+        val periodSeconds: Int
 )
