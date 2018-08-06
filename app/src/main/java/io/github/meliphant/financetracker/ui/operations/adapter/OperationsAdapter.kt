@@ -19,9 +19,6 @@ import java.text.SimpleDateFormat
 class OperationsAdapter(private val mValues: List<Operation>)
     : RecyclerView.Adapter<OperationsAdapter.ViewHolder>() {
 
-//    fun updateList(lst: List<Operation>) {
-//        mValues = lst
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
