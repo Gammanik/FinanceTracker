@@ -51,6 +51,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_lib"
 
     def roomVer = "1.1.1"
+    implementation 'com.android.support:support-v4:27.1.1'
     kapt "android.arch.persistence.room:compiler:$roomVer"
     implementation "android.arch.persistence.room:runtime:$roomVer"
 

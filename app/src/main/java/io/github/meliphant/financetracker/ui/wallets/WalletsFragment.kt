@@ -53,6 +53,7 @@ class WalletsFragment : MvpAppCompatFragment(), WalletsView {
 
         view_pager.adapter = WalletPagerAdapter(mutableWallets, childFragmentManager)
         recycler_tab_layout.setUpWithAdapter(WalletRecyclerAdapter(mutableWallets, view_pager))
+        recycler_tab_layout.setAutoSelectionMode(true)
     }
 
 }

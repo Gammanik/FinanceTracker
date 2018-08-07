@@ -3,6 +3,7 @@ package io.github.meliphant.financetracker.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 
 class MainActivity : AppCompatActivity(){
@@ -12,7 +13,8 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_main, WalletsFragment())
+                .replace(R.id.fl_main, MyWalletsFragment())
+                .addToBackStack("walletsFragment")
                 .commitAllowingStateLoss()
     }
 

@@ -27,5 +27,8 @@
     <string name="new_income">new income</string>
     <string name="new_expense">new expense</string>
 
+    <!--my wallets screen-->
+    <string name="default_value_text">Default value: </string>
+
 
 </resources>
