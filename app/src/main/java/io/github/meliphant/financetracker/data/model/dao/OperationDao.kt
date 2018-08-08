@@ -19,6 +19,9 @@ interface OperationDao {
     @Query("SELECT IdleOperation.idleOpId as operationId, IdleOperation.type, IdleOperation.comment, IdleOperation.amountOp_amount, IdleOperation.amountOp_currency, IdleOperation.amountMain_amount, IdleOperation.amountMain_currency, Wallet.*, MyCategory.*, IdleOperation.datetime, IdleOperation.isPeriodic, IdleOperation.periodSeconds FROM idleOperation INNER JOIN wallet ON idleOperation.walletId = wallet.walletId INNER JOIN mycategory ON IdleOperation.categoryId = mycategory.categoryId WHERE IdleOperation.isPeriodic = 1")
     fun getAllPeriodic(): List<Operation>
 
+//    @Query()
+//    fun getByCategoryId()
+
     @Query("DELETE FROM idleOperation")
     fun nukeTable()
 

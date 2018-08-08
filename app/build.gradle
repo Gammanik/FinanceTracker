@@ -84,8 +84,11 @@ dependencies {
     def fabVer = "1.10.1"
     implementation "com.getbase:floatingactionbutton:$fabVer"
 
-    def ahBottomNavVer="2.1.0"
+    def ahBottomNavVer = "2.1.0"
     implementation "com.aurelhubert:ahbottomnavigation:$ahBottomNavVer"
+
+    def chartLibVer = "v3.0.3"
+    implementation "com.github.PhilJay:MPAndroidChart:$chartLibVer"
 
     //test
     def junit = '4.12'

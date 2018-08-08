@@ -6,6 +6,8 @@ import io.github.meliphant.financetracker.di.module.AppModule
 import io.github.meliphant.financetracker.di.module.DbModule
 import io.github.meliphant.financetracker.ui.addoperation.AddOperationFragment
 import io.github.meliphant.financetracker.ui.addoperation.AddOperationPresenter
+import io.github.meliphant.financetracker.ui.diagram.DiagramFragment
+import io.github.meliphant.financetracker.ui.diagram.DiagramPresenter
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsPresenter
 import io.github.meliphant.financetracker.ui.operations.OperationListFragment
@@ -30,4 +32,7 @@ interface AppComponent {
 
     fun inject(myWalletsFragment: MyWalletsFragment)
     fun inject(myWalletsPresenter: MyWalletsPresenter)
+
+    fun inject(diagramFragment: DiagramFragment)
+    fun inject(diagramPresenter: DiagramPresenter)
 }

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:context=".ui.operations.OperationListFragment"
-        tools:listitem="@layout/fragment_operation" />
+        tools:listitem="@layout/item_operation" />
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/fab_menu"

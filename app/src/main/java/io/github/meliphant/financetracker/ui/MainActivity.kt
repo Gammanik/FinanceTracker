@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import io.github.meliphant.financetracker.R
+import io.github.meliphant.financetracker.ui.diagram.DiagramFragment
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity(){
                         .commitAllowingStateLoss()
                 1 ->  supportFragmentManager.beginTransaction().replace(R.id.fl_main, MyWalletsFragment())
                             .commitAllowingStateLoss()
+                2 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, DiagramFragment())
+                        .commitAllowingStateLoss()
             }
             true
         }

@@ -32,4 +32,6 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
     fun getWalletById(walletId: Int): Wallet {
         return walletRepo.getWalletById(walletId)
     }
+
+//    fun getAllCategorySpend():
 }
