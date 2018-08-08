@@ -3,25 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.addwallet.AddWalletFragment">
+    tools:context=".ui.addwallet.AddWalletFragment"
+    android:theme="@style/AddWalletTheme">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        
+        
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBottomNavigationAccent">
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="67dp"
-            tools:layout_editor_absoluteY="182dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="hint" />
-        </android.support.design.widget.TextInputLayout>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -14,11 +14,20 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_operation_screen_name"
-            android:textSize="20sp"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_operation_screen_name"
+                android:textSize="20sp"/>
+
+
+
+        </LinearLayout>
+
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -39,13 +48,13 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:hint="@string/hint_enter_amount"
+            android:textSize="28dp"
             android:inputType="number"
             android:textColorHint="@drawable/selector_hint"
             app:met_baseColor="@color/colorPrimaryDark"
             app:met_floatingLabel="highlight"
             app:met_floatingLabelText="@string/hint_enter_amount"
-            app:met_primaryColor="@color/colorPrimary"
-            tools:textSize="30sp" />
+            app:met_primaryColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/tv_currency_sign"
@@ -60,67 +69,32 @@
 
     <RelativeLayout
         android:id="@+id/rl_buttons"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/et_operation_comment">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btn_choose_wallet"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+        <Spinner
+            android:id="@+id/spinner_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:scaleType="centerCrop"
-            app:civ_border_color="@color/colorImgBorder"
-            app:civ_border_width="2dp"
-            app:srcCompat="@drawable/wallet_choose_wallet" />
+            android:spinnerMode="dialog">
+        </Spinner>
 
-        <TextView
-            android:id="@+id/choose_wallet_text"
-            android:layout_width="@dimen/icon_size"
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_choose_wallet"
-            android:layout_marginTop="0dp"
-            android:lines="1"
-            android:text="choose wallet"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            android:layout_alignParentEnd="true">
+        </Spinner>
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btn_choose_date"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_centerHorizontal="true"
-            app:civ_border_color="@color/colorImgBorder"
-            app:civ_border_width="2dp"
-            app:srcCompat="@drawable/btn_calendar" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btn_choose_category"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_alignParentEnd="true"
-            app:civ_border_color="@color/colorImgBorder"
-            app:civ_border_width="2dp"
-            app:srcCompat="@drawable/category_travel" />
-
-        <TextView
-            android:id="@+id/category_text"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/btn_choose_wallet"
-            android:lines="1"
-            android:text="Other"
-            android:textAlignment="center"
-            android:textSize="12sp" />
 
     </RelativeLayout>
 
@@ -130,83 +104,29 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:hint="comment"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btn_save_operation"
         android:layout_width="44dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape_rounded_button"
         android:text=">"
         android:textColor="@color/colorBtnBorder"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/rl_buttons"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.287"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_operation_comment">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/repeat_text" />
-
-        <EditText
-            android:id="@+id/et_repeat_days"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="20sp"
-            android:gravity="end"
-            android:inputType="number" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="days" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_buttons">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_wallets_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_choose_wallet" />
-    </FrameLayout>
 
 
 </android.support.constraint.ConstraintLayout>

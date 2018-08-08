@@ -12,6 +12,8 @@ import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsPresenter
 import io.github.meliphant.financetracker.ui.operations.OperationListFragment
 import io.github.meliphant.financetracker.ui.operations.OperationListPresenter
+import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsFragment
+import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsPresenter
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsPresenter
 import javax.inject.Singleton
@@ -35,4 +37,7 @@ interface AppComponent {
 
     fun inject(diagramFragment: DiagramFragment)
     fun inject(diagramPresenter: DiagramPresenter)
+
+    fun inject(periodicalOperationsFragment: PeriodicalOperationsFragment)
+    fun inject(periodicalOperationsPresenter: PeriodicalOperationsPresenter)
 }

@@ -2,12 +2,15 @@ package io.github.meliphant.financetracker.data
 
 import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.Wallet
+import io.github.meliphant.financetracker.data.model.utils.CategorySpend
+import io.github.meliphant.financetracker.data.repository.CategoryRepository
 import io.github.meliphant.financetracker.data.repository.OperationRepository
 import io.github.meliphant.financetracker.data.repository.WalletRepository
 import javax.inject.Inject
 
 class MainInteractor @Inject constructor(private val opRepo: OperationRepository,
-                                         private val walletRepo: WalletRepository) {
+                                         private val walletRepo: WalletRepository,
+                                         private val categoryRepo: CategoryRepository) {
 
     fun saveOperation(op: Operation) {
         opRepo.saveOperation(op)
@@ -18,7 +21,7 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
     }
 
     fun getOperationsByWalletId(walletId: Int): List<Operation> {
-        return opRepo.getOperations(walletId)
+        return opRepo.getOperationsByWalletId(walletId)
     }
 
     fun saveWallet(wallet: Wallet) {
@@ -33,5 +36,11 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
         return walletRepo.getWalletById(walletId)
     }
 
-//    fun getAllCategorySpend():
+    fun getAllPeriodicOperations(): List<Operation> {
+        return opRepo.getAllPeriodicOperations()
+    }
+
+    fun getCategorySpent(walletId: Int): List<CategorySpend> {
+        return categoryRepo.getAllCategoriesSpend(walletId)
+    }
 }

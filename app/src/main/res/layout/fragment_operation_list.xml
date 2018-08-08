@@ -23,7 +23,7 @@
             android:layout_marginBottom="6dp"
             android:layout_marginEnd="6dp"
             app:fab_labelStyle="@style/menu_labels_style"
-            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_addButtonColorNormal="@color/colorPrimaryDark"
             app:fab_colorPressed="@color/cardview_shadow_end_color"
             app:layout_anchor="@id/rv_operations"
             app:fab_icon="@drawable/ic_add"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:fab_colorNormal="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimaryDark"
                 app:fab_icon="@drawable/ic_add"
                 app:fab_size="mini"
                 app:fab_title="@string/new_income" />
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:fab_colorNormal="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimaryDark"
                 app:fab_icon="@drawable/ic_remove"
                 app:fab_size="mini"
                 app:fab_title="@string/new_expense" />

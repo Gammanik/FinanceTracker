@@ -6,13 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.wallets.WalletsFragment">
 
+
     <com.nshmura.recyclertablayout.RecyclerTabLayout
         android:id="@+id/recycler_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         app:tabGravity="center"
-        rtl_tabIndicatorHeight="19dp"
         app:tabMode="scrollable"
         tools:listitem="@layout/item_wallet" />
 

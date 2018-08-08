@@ -25,9 +25,13 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
         return operationDao.getAll()
     }
 
-    fun getOperations(walletId: Int): List<Operation> {
+    fun getOperationsByWalletId(walletId: Int): List<Operation> {
         handlePeriodicOperations()
         return operationDao.getByWalletId(walletId)
+    }
+
+    fun getAllPeriodicOperations(): List<Operation> {
+        return operationDao.getAllPeriodic()
     }
 
     private fun changeWalletBalance(op: Operation): Operation {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#177bbd</color>
+    <color name="colorPrimary">#FF757575</color>
     <color name="colorPrimaryDark">#FF757575</color>
-    <color name="colorAccent">#F06292</color>
+    <color name="colorAccent">#e4000000</color>
 
     <color name="colorImgBorder">#FF757575</color>
     <color name="colorBtnBorder">#ffffff</color>
@@ -10,7 +10,6 @@
     <color name="colorWalletCard">#dbf4f4f4</color>
     <color name="colorWalletAmount">#2f9c36</color>
     <color name="colorSpending">#d1a42622</color>
-
 
     <color name="fab_text_color">#eaffffff</color>
     <color name="fab_text_background">#d6000000</color>

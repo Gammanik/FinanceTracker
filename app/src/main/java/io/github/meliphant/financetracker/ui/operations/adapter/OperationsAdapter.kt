@@ -29,7 +29,7 @@ class OperationsAdapter(private val mValues: List<Operation>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Operation = mValues[position]
         holder.opComment.text = item.comment
-        holder.opDateTime.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(item.datetime)
+        holder.opDateTime.text = SimpleDateFormat("HH:mm dd.MM.yyyy").format(item.datetime)
 
         Glide.with(holder.mView.context)
                 .load(getImage(holder.mView.context, item.category.categoryIconUrl))

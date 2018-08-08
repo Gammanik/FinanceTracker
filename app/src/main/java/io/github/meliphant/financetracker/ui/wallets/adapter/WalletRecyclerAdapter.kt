@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.nshmura.recyclertablayout.RecyclerTabLayout
@@ -52,7 +53,7 @@ class WalletRecyclerAdapter(var list: List<Wallet>, private val myViewPager: Vie
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal val image: CircleImageView = itemView.wallet_icon
+        internal val image: ImageView = itemView.wallet_icon
         internal val name: TextView = itemView.wallet_name
         internal val amount = itemView.wallet_amount
     }

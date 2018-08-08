@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -40,19 +41,15 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     @InjectPresenter lateinit var presenter: AddOperationPresenter
     @ProvidePresenter fun providePresenter() = presenter
 
-    private var TOGGLE_IS_DOWN: Boolean = false
-
     private var chooseWalletListener: OnChooseWalletInteractionListener? =
             object: OnChooseWalletInteractionListener{
                 override fun onChooseWalletInteraction(item: Wallet) {
-                    toggleChooseWallets()
                     presenter.loadWalletById(item.walletId)
                     Toast.makeText(context, "wallet chosen: ${item.walletName}", Toast.LENGTH_SHORT).show()
                 }
 
             }
-    private val chooseWalletAdapter = ChooseWalletAdapter(listOf(), chooseWalletListener)
-
+    private lateinit var chooseWalletAdapter: ChooseWalletAdapter
     private var walletId: Int = ALL_WALLETS_ID
     lateinit var walletInstance: Wallet
     private lateinit var operationType: String
@@ -79,56 +76,48 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     }
 
     private fun initUI() {
-        rv_wallets_choose.visibility = View.GONE
-        Glide.with(this)
-                .load(getImage(requireContext(), "btn_calendar"))
-                .into(btn_choose_date)
-
-        Glide.with(this)
-                .load(getImage(requireContext(), "category_travel"))
-                .into(btn_choose_category)
-
         toolbar.setNavigationIcon(R.drawable.toolbar_btn_back)
         toolbar.setNavigationOnClickListener({
             (context as FragmentActivity).supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fl_main, WalletsFragment())
                     .commitAllowingStateLoss()
+
+            hideKeyboard(this.view)
         })
-        btn_choose_wallet.setOnClickListener({ toggleChooseWallets() })
-        rv_wallets_choose.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rv_wallets_choose.adapter = chooseWalletAdapter
+
+//        chooseWalletAdapter = ChooseWalletAdapter(requireContext(), R.layout.spinner_item_wallet, listOf(), chooseWalletListener)
+        val years = arrayOf("1996", "1997", "1998", "1998")
+//        spinner_wallet.setDropdownView
+//        chooseWalletAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+//        spinner_wallet.adapter = chooseWalletAdapter
+        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.spinner_item_wallet, years)
+        spinner_wallet.adapter = tmpAdapter
+        presenter.loadAllWallets()
     }
 
-    private fun toggleChooseWallets() {
-        if (TOGGLE_IS_DOWN) {
-            TOGGLE_IS_DOWN = false
-            rv_wallets_choose.visibility = View.GONE
-
-        } else {
-            TOGGLE_IS_DOWN = true
-            presenter.loadAllWallets()
-        }
-    }
-
-    override fun expandChooseWallets(list: List<Wallet>) {
-        rv_wallets_choose.visibility = View.VISIBLE
-        chooseWalletAdapter.setData(list)
-    }
 
     private fun getImage(cntxt: Context, imageName: String): Int {
         return cntxt.resources.getIdentifier(imageName, "drawable", cntxt.packageName)
     }
 
-    override fun onOperationSaved() {
-        if (this.view != null) { //hide keyboard
-            val view: View = this.view!!.findFocus()
-            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
+    override fun expandChooseWallets(list: List<Wallet>) {
+        Log.e("tg", "wallets got: $list")
+//        chooseWalletAdapter.setData(list)
+    }
 
+    override fun onOperationSaved() {
+        hideKeyboard(this.view)
         navigateToWalletsFragment()
         Toast.makeText(requireContext(), "OPERATION ADDED!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun hideKeyboard(view: View?) {
+        if (view != null) { //hide keyboard
+            val viewFocus: View = this.view!!.findFocus()
+            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(viewFocus.windowToken, 0)
+        }
     }
 
     private fun navigateToWalletsFragment() {
@@ -145,10 +134,6 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
         tv_currency_sign.text = wallet.money.currency.sign.toString()
         btn_save_operation.setOnClickListener {saveOperation()}
 
-        choose_wallet_text.text = wallet.walletName
-        Glide.with(this)
-                .load(getImage(requireContext(), wallet.walletIconUrl))
-                .into(btn_choose_wallet)
 
          et_amount.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -171,12 +156,6 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     private fun saveOperation() {
         //todo: get category from view
-        var periodSeconds: Int = 0
-
-        if (et_repeat_days.text != null && et_repeat_days.text.toString() != "") {
-            periodSeconds = et_repeat_days.text.toString().toInt()
-        }
-
 
         val opToSave = Operation(
                 type = OperationType.valueOf(operationType),
@@ -185,18 +164,17 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                 amountMainCurrency = Money(0.0, MyCurrency.USD),
                 wallet = walletInstance, category = MyCategory(1, "groceries", "category_groceries"),
                 datetime = Date(),
-                isPeriodic = periodSeconds > 0,
-                periodSeconds = periodSeconds
+                isPeriodic = false,
+                periodSeconds = 0
         )
         presenter.saveOperation(opToSave)
     }
 
     override fun onWalletLoadedError() {
-        choose_wallet_text.text = getString(R.string.choose_wallet)
-        Glide.with(this)
-                .load(getImage(requireContext(), "wallet_choose_wallet"))
-                .into(btn_choose_wallet)
-        tv_currency_sign.text = "?"
+//        Glide.with(this)
+//                .load(getImage(requireContext(), "wallet_choose_wallet"))
+//                .into(btn_choose_wallet)
+//        tv_currency_sign.text = "?"
     }
 
     interface OnChooseWalletInteractionListener {

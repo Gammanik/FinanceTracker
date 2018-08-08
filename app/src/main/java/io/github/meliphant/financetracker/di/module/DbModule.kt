@@ -19,5 +19,8 @@ import javax.inject.Singleton
     fun provideWalletDao(db: AppDb) = db.walletDao()
 
     @Provides @Singleton
+    fun provideCategoryDao(db: AppDb) = db.categoryDao()
+
+    @Provides @Singleton
     fun provideWalletOperationDao(db: AppDb) = db.walletOperationDao()
 }
