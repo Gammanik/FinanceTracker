@@ -84,6 +84,9 @@ dependencies {
     def fabVer = "1.10.1"
     implementation "com.getbase:floatingactionbutton:$fabVer"
 
+    def ahBottomNavVer="2.1.0"
+    implementation "com.aurelhubert:ahbottomnavigation:$ahBottomNavVer"
+
     //test
     def junit = '4.12'
     testImplementation "junit:junit:$junit"

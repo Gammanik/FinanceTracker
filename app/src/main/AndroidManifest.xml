@@ -24,11 +24,6 @@
             android:label="@string/action_settings"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/MyAppTheme" />
-        <activity
-            android:name=".ui.AboutActivity"
-            android:label="@string/action_about"
-            android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/MyAppTheme" />
     </application>
 
 </manifest>
