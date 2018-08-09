@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="6dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
             app:fab_labelStyle="@style/menu_labels_style"
             app:fab_addButtonColorNormal="@color/colorPrimaryDark"
             app:fab_addButtonColorPressed="@color/fab_text_background"
@@ -34,6 +34,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rv_operations"
             app:layout_constraintVertical_bias="1.0" >
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_new_template"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_icon="@drawable/fab_from_template"
+                app:fab_size="mini"
+                app:fab_title="@string/new_operation_from_template" />
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_new_income"
@@ -55,6 +65,7 @@
                 app:fab_icon="@drawable/ic_remove"
                 app:fab_size="mini"
                 app:fab_title="@string/new_expense" />
+
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.constraint.ConstraintLayout>

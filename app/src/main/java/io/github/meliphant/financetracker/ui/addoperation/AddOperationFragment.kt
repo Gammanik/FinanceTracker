@@ -49,7 +49,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                 }
 
             }
-    private lateinit var chooseWalletAdapter: ChooseWalletAdapter
+//    private lateinit var chooseWalletAdapter: ChooseWalletAdapter
     private var walletId: Int = ALL_WALLETS_ID
     lateinit var walletInstance: Wallet
     private lateinit var operationType: String
@@ -85,36 +85,47 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
             hideKeyboard(this.view)
         })
-
-//        chooseWalletAdapter = ChooseWalletAdapter(requireContext(), R.layout.spinner_item_wallet, listOf(), chooseWalletListener)
-        val years = arrayOf("1996", "1997", "1998", "1998")
-//        spinner_wallet.setDropdownView
-//        chooseWalletAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-//        spinner_wallet.adapter = chooseWalletAdapter
-        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.spinner_item_wallet, years)
-        spinner_wallet.adapter = tmpAdapter
         presenter.loadAllWallets()
+        presenter.loadAllCategories()
+
+        btn_save_operation.visibility = View.INVISIBLE
+        btn_save_operation.setOnClickListener {saveOperation()}
+
+        et_amount.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                val text =p0.toString()
+                if(text.isNotEmpty()) {
+                    btn_save_operation.visibility = View.VISIBLE
+                } else {
+                    btn_save_operation.visibility = View.GONE
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {}
+        })
     }
 
-
-    private fun getImage(cntxt: Context, imageName: String): Int {
-        return cntxt.resources.getIdentifier(imageName, "drawable", cntxt.packageName)
+    override fun onWalletListLoaded(walletsList: List<Wallet>) {
+        val walletsNames = walletsList.map { it.walletName }
+        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, walletsNames)
+        spinner_wallet.adapter = tmpAdapter
     }
 
-    override fun expandChooseWallets(list: List<Wallet>) {
-        Log.e("tg", "wallets got: $list")
-//        chooseWalletAdapter.setData(list)
+    override fun onCategoriesLoaded(categoriesList: List<MyCategory>) {
+        val categoriesNames = categoriesList.map { it.categoryName }
+        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, categoriesNames)
+        spinner_category.adapter = tmpAdapter
     }
 
     override fun onOperationSaved() {
         hideKeyboard(this.view)
         navigateToWalletsFragment()
-        Toast.makeText(requireContext(), "OPERATION ADDED!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "operation added", Toast.LENGTH_SHORT).show()
     }
 
     private fun hideKeyboard(view: View?) {
-        if (view != null) { //hide keyboard
-            val viewFocus: View = this.view!!.findFocus()
+        if (view?.findFocus() != null) { //hide keyboard
+            val viewFocus: View = view.findFocus()
             val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(viewFocus.windowToken, 0)
         }
@@ -132,25 +143,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
         walletInstance = wallet
 
         tv_currency_sign.text = wallet.money.currency.sign.toString()
-        btn_save_operation.setOnClickListener {saveOperation()}
-
-
-         et_amount.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                val text =p0.toString()
-                if(text.isNotEmpty()) {
-                    btn_save_operation.visibility = View.VISIBLE
-                } else {
-                    btn_save_operation.visibility = View.GONE
-                }
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
-            }
-        })
+        //todo: set spinner
     }
 
 
@@ -164,17 +157,13 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                 amountMainCurrency = Money(0.0, MyCurrency.USD),
                 wallet = walletInstance, category = MyCategory(1, "groceries", "category_groceries"),
                 datetime = Date(),
-                isPeriodic = false,
                 periodSeconds = 0
         )
         presenter.saveOperation(opToSave)
     }
 
     override fun onWalletLoadedError() {
-//        Glide.with(this)
-//                .load(getImage(requireContext(), "wallet_choose_wallet"))
-//                .into(btn_choose_wallet)
-//        tv_currency_sign.text = "?"
+
     }
 
     interface OnChooseWalletInteractionListener {
@@ -188,11 +177,13 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     companion object {
         @JvmStatic
-        fun newInstance(walletId: Int, operationType: OperationType) =
+        fun newInstance(walletId: Int, operationType: OperationType, templateOperationId: Int?) =
                 AddOperationFragment().apply {
                     arguments = Bundle().apply {
                         putInt(Keys.KEY_WALLET_ID.name, walletId)
                         putString(Keys.KEY_TRANSACTION_TYPE.name, operationType.name)
+                        if (templateOperationId != null)
+                            putInt(Keys.KEY_TEMPLATE_ID.name, templateOperationId)
                     }
                 }
     }

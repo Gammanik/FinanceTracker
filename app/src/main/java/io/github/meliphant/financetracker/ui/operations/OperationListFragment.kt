@@ -48,14 +48,15 @@ class OperationListFragment : MvpAppCompatFragment(), OperationListView {
 
     private fun initFab() {
         fab_new_income.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.INCOME))
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.INCOME, null))
                     .addToBackStack("AddOperationFragment")
                     .commit()
         }
         fab_new_expense.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.OUTCOME))
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.OUTCOME, null), null)
+                    .addToBackStack("AddOperationFragment")
                     .commit()
         }
 

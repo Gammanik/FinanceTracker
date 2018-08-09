@@ -26,6 +26,7 @@
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
             android:contentDescription="operation description"
             app:srcCompat="@drawable/category_freelance" />
 
@@ -50,18 +51,18 @@
             android:layout_marginEnd="4dp"
             android:layout_marginTop="4dp">
 
+            <TextView
+                android:id="@+id/wallet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="some bill" />
+
             <ImageView
                 android:id="@+id/wallet_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 app:srcCompat="@drawable/wallet_wlcard" />
-
-            <TextView
-                android:id="@+id/wallet_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="some bill" />
 
         </LinearLayout>
 

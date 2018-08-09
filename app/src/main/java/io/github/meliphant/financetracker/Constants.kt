@@ -11,5 +11,6 @@ const val ADD_WALLET_ID = -2
 //const for fragments communication
 enum class Keys {
     KEY_TRANSACTION_TYPE,
-    KEY_WALLET_ID
+    KEY_WALLET_ID,
+    KEY_TEMPLATE_ID
 }

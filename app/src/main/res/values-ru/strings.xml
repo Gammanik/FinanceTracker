@@ -25,6 +25,7 @@
     <string name="repeat_text">Повторять каждые </string>
     <string name="new_income">новый расход</string>
     <string name="new_expense">новых доход</string>
+    <string name="new_operation_from_template">новая операция из шаблонов</string>
 
     <!--my wallets screen-->
     <string name="default_value_text">Валюта по умолчанию: </string>

@@ -12,6 +12,9 @@ interface CategoryDao {
     @Insert
     fun saveCategory(myCategory: MyCategory)
 
+    @Insert
+    fun saveCategoryList(categoryList: List<MyCategory>)
+
     @Query("SELECT * FROM mycategory")
     fun getAllCategories(): List<MyCategory>
 

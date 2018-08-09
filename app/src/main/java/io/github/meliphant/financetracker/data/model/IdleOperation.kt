@@ -31,6 +31,5 @@ data class IdleOperation(
         val walletId: Int,
         val categoryId: Int,
         val datetime: Date,
-        val isPeriodic: Boolean = false,
         val periodSeconds: Int
 )

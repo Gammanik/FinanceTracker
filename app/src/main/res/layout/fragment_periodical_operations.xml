@@ -14,46 +14,5 @@
         tools:context=".ui.operations.OperationListFragment"
         tools:listitem="@layout/item_periodical_operation" />
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fab_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginEnd="6dp"
-        app:fab_labelStyle="@style/menu_labels_style"
-        app:fab_addButtonColorNormal="@color/fab_text_background"
-        app:fab_addButtonColorPressed="@color/colorPrimaryDark"
-        app:fab_colorPressed="@color/cardview_shadow_end_color"
-        app:layout_anchor="@id/rv_operations"
-        app:fab_icon="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_periodical_operations"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.966"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_periodical_operations"
-        app:layout_constraintVertical_bias="1.0" >
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_new_periodical_income"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/ic_add"
-            app:fab_size="mini"
-            app:fab_title="@string/new_periodical_income" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_new_periodical_expense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/ic_remove"
-            app:fab_size="mini"
-            app:fab_title="@string/new_periodical_expense" />
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.constraint.ConstraintLayout>

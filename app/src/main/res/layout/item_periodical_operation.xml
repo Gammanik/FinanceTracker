@@ -18,6 +18,7 @@
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
             android:contentDescription="operation description"
             app:srcCompat="@drawable/category_groceries" />
 
@@ -41,18 +42,18 @@
             android:layout_marginEnd="12dp"
             android:layout_below="@+id/op_category_img">
 
+            <TextView
+                android:id="@+id/wallet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="some bill" />
+
             <ImageView
                 android:id="@+id/wallet_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 app:srcCompat="@drawable/wallet_wlcard" />
-
-            <TextView
-                android:id="@+id/wallet_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="some bill" />
 
         </LinearLayout>
 
@@ -73,8 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:textOn="Enabled"
-            android:textOff="Disabled"/>
+            android:layout_marginStart="4dp"
+            android:textOff="Disabled"
+            android:textOn="Enabled" />
 
         <TextView
             android:id="@+id/tv_every"

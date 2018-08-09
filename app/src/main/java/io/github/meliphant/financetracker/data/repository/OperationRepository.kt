@@ -78,7 +78,6 @@ fun fromPeriodicToNormalOperation(periodicOp: Operation): Operation {
             wallet = periodicOp.wallet,
             category = periodicOp.category,
             datetime = periodicOp.datetime,
-            isPeriodic = false,
             periodSeconds = 0
     )
 }
@@ -94,9 +93,8 @@ object OperationMapper {
         val amountCurrencyOperation = operation.amountOperationCurrency
         val date = operation.datetime
         val categoryId = operation.category.categoryId
-        val isPeriodic = operation.isPeriodic
         val periodSeconds = operation.periodSeconds
 
-        return IdleOperation(id, opType, comment, amountCurrencyOperation, amountCurrencyMain, walletId, categoryId, date, isPeriodic, periodSeconds)
+        return IdleOperation(id, opType, comment, amountCurrencyOperation, amountCurrencyMain, walletId, categoryId, date, periodSeconds)
     }
 }

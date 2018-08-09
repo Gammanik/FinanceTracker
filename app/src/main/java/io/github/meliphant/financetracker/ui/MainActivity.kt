@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(){
     private fun initBottomNavigation() {
         bottomNavigation.addItem(AHBottomNavigationItem("home", R.drawable.nav_home))
         bottomNavigation.addItem(AHBottomNavigationItem("periodical", R.drawable.nav_periodical))
-        bottomNavigation.addItem(AHBottomNavigationItem("wallets", R.drawable.nav_my_wallets))
         bottomNavigation.addItem(AHBottomNavigationItem("diagram", R.drawable.nav_diagram))
         bottomNavigation.addItem(AHBottomNavigationItem("settings", R.drawable.nav_settings))
 
