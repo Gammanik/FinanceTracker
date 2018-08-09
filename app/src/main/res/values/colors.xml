@@ -8,6 +8,7 @@
     <color name="colorBtnBorder">#ffffff</color>
 
     <color name="colorWalletCard">#dbf4f4f4</color>
+    <color name="colorMyWalletCard">#dba39e9e</color>
     <color name="colorWalletAmount">#2f9c36</color>
     <color name="colorSpending">#d1a42622</color>
 

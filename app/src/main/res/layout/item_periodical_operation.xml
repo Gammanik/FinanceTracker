@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="120dp"
     android:layout_marginBottom="1dp"
     app:cardCornerRadius="3dp">
 
@@ -19,24 +19,27 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:contentDescription="operation description"
-            app:srcCompat="@drawable/category_travel" />
+            app:srcCompat="@drawable/category_groceries" />
 
         <TextView
             android:id="@+id/op_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/op_category_img"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="72dp"
+            android:layout_alignTop="@+id/op_category_img"
+            android:layout_marginStart="67dp"
             android:text="some operation"
-            android:textSize="20sp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:maxWidth="200dp"
+            android:lines="1"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/op_amount"
-            android:layout_alignEnd="@+id/op_amount">
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_below="@+id/op_category_img">
 
             <ImageView
                 android:id="@+id/wallet_img"
@@ -59,27 +62,43 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            android:text="infinity ₽"
+            android:layout_marginEnd="12dp"
+            android:text="infinity₽"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="22sp" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switch_is_pending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Disabled" />
+            android:textOn="Enabled"
+            android:textOff="Disabled"/>
+
+        <TextView
+            android:id="@+id/tv_every"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/op_category_img"
+            android:layout_alignStart="@+id/op_comment"
+            android:text="every " />
+
+        <TextView
+            android:id="@+id/number_of_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/op_category_img"
+            android:layout_toEndOf="@+id/tv_every"
+            android:text="0" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-72dp"
-            android:layout_toStartOf="@+id/op_comment"
-            android:text="TextView" />
+            android:layout_alignBottom="@+id/op_category_img"
+            android:layout_toEndOf="@+id/number_of_days"
+            android:text=" day(s)" />
 
     </RelativeLayout>
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_operations"
+        android:id="@+id/rv_periodical_operations"
         android:name="io.github.meliphant.financetracker.ui.operations.OperationListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,37 +23,37 @@
         android:layout_marginBottom="6dp"
         android:layout_marginEnd="6dp"
         app:fab_labelStyle="@style/menu_labels_style"
-        app:fab_addButtonColorNormal="@color/colorPrimaryDark"
-        app:fab_addButtonColorPressed="@color/fab_text_background"
+        app:fab_addButtonColorNormal="@color/fab_text_background"
+        app:fab_addButtonColorPressed="@color/colorPrimaryDark"
         app:fab_colorPressed="@color/cardview_shadow_end_color"
         app:layout_anchor="@id/rv_operations"
         app:fab_icon="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_operations"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_periodical_operations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.966"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_operations"
+        app:layout_constraintTop_toTopOf="@+id/rv_periodical_operations"
         app:layout_constraintVertical_bias="1.0" >
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_new_income"
+            android:id="@+id/fab_new_periodical_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/ic_add"
             app:fab_size="mini"
-            app:fab_title="@string/new_income" />
+            app:fab_title="@string/new_periodical_income" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_new_expense"
+            android:id="@+id/fab_new_periodical_expense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/ic_remove"
             app:fab_size="mini"
-            app:fab_title="@string/new_expense" />
+            app:fab_title="@string/new_periodical_expense" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.constraint.ConstraintLayout>

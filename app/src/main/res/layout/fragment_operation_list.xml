@@ -24,7 +24,8 @@
             android:layout_marginEnd="6dp"
             app:fab_labelStyle="@style/menu_labels_style"
             app:fab_addButtonColorNormal="@color/colorPrimaryDark"
-            app:fab_colorPressed="@color/cardview_shadow_end_color"
+            app:fab_addButtonColorPressed="@color/fab_text_background"
+            app:fab_addButtonPlusIconColor="@color/fab_text_background"
             app:layout_anchor="@id/rv_operations"
             app:fab_icon="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="@+id/rv_operations"
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_addButtonPlusIconColor="@color/fab_text_background"
                 app:fab_icon="@drawable/ic_add"
                 app:fab_size="mini"
                 app:fab_title="@string/new_income" />

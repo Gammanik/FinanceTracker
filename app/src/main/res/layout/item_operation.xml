@@ -16,9 +16,8 @@
             android:id="@+id/op_datetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/op_comment"
-            android:layout_marginTop="27dp"
+            android:layout_alignTop="@+id/op_category_img"
             android:text="15:03 19.09.1996" />
 
         <ImageView
@@ -28,7 +27,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:contentDescription="operation description"
-            app:srcCompat="@drawable/category_travel"/>
+            app:srcCompat="@drawable/category_freelance" />
 
         <TextView
             android:id="@+id/op_comment"
@@ -36,16 +35,20 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/op_category_img"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="79dp"
+            android:lines="1"
+            android:maxWidth="180dp"
             android:text="some operation"
-            android:textSize="20sp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/op_amount"
-            android:layout_alignEnd="@+id/op_amount">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp">
 
             <ImageView
                 android:id="@+id/wallet_img"
@@ -68,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="26dp"
+            android:layout_marginEnd="17dp"
             android:text="infinity ₽"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="22sp" />

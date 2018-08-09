@@ -35,7 +35,7 @@ class OperationsAdapter(private val mValues: List<Operation>)
                 .load(getImage(holder.mView.context, item.category.categoryIconUrl))
                 .into(holder.opCategoryImg)
 
-        holder.opAmount.text = "${item.amountOperationCurrency.amount} ${item.wallet.money.currency.sign}"
+        holder.opAmount.text = "${item.amountOperationCurrency.amount}${item.wallet.money.currency.sign}"
 
         if (item.type == OperationType.INCOME) {
             holder.opAmount.setTextColor(holder.mView.resources.getColor(R.color.colorWalletAmount))
