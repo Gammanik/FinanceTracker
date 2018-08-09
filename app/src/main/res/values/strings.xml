@@ -19,14 +19,17 @@
     <string name="close">Close</string>
     <string name="save">Save</string>
 
+    <!---->
+    <string name="new_income">new income</string>
+    <string name="new_expense">new expense</string>
+    <string name="new_operation_from_template">new operation from template</string>
+
     <!--add operation screen-->
     <string name="add_operation_screen_name">New operation</string>
     <string name="hint_enter_amount">amount</string>
     <string name="choose_wallet">choose wallet</string>
-    <string name="repeat_text">Repeat every </string>
-    <string name="new_income">new income</string>
-    <string name="new_expense">new expense</string>
-    <string name="new_operation_from_template">new operation from template</string>
+    <string name="repeat_text">Repeat in days: </string>
+    <string name="is_periodical">Periodical operation</string>
 
     <!--periodical operations screen-->
     <string name="new_periodical_income">new periodical income</string>

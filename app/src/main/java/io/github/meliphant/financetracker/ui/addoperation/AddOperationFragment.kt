@@ -13,10 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -41,17 +38,11 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     @InjectPresenter lateinit var presenter: AddOperationPresenter
     @ProvidePresenter fun providePresenter() = presenter
 
-    private var chooseWalletListener: OnChooseWalletInteractionListener? =
-            object: OnChooseWalletInteractionListener{
-                override fun onChooseWalletInteraction(item: Wallet) {
-                    presenter.loadWalletById(item.walletId)
-                    Toast.makeText(context, "wallet chosen: ${item.walletName}", Toast.LENGTH_SHORT).show()
-                }
 
-            }
-//    private lateinit var chooseWalletAdapter: ChooseWalletAdapter
     private var walletId: Int = ALL_WALLETS_ID
-    lateinit var walletInstance: Wallet
+    private var walletInstance: Wallet? = null
+    private var categoryInstance: MyCategory? = null
+
     private lateinit var operationType: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,26 +61,54 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initUI()
         presenter.loadWalletById(walletId)
+        initUI()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initUI() {
+        presenter.loadAllWallets()
+        presenter.loadAllCategories()
+
+        initSpinners()
+
+        initBackNavigationButton()
+        initPeriodicalOperationBox()
+        initSaveOperationButton()
+
+    }
+
+    private fun initPeriodicalOperationBox() {
+        periodical_repeat_view.visibility = View.INVISIBLE
+        cb_periodical_operation.setOnClickListener {
+            if ((it as CheckBox).isChecked) {
+                periodical_repeat_view.visibility = View.VISIBLE
+            } else {
+                periodical_repeat_view.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun initBackNavigationButton() {
         toolbar.setNavigationIcon(R.drawable.toolbar_btn_back)
         toolbar.setNavigationOnClickListener({
             (context as FragmentActivity).supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fl_main, WalletsFragment())
                     .commitAllowingStateLoss()
-
             hideKeyboard(this.view)
         })
-        presenter.loadAllWallets()
-        presenter.loadAllCategories()
+    }
 
+    private fun initSaveOperationButton() {
         btn_save_operation.visibility = View.INVISIBLE
-        btn_save_operation.setOnClickListener {saveOperation()}
+        btn_save_operation.setOnClickListener {
+            if (walletInstance != null) {
+                saveOperation()
+            } else {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         et_amount.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -105,15 +124,42 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
         })
     }
 
-    override fun onWalletListLoaded(walletsList: List<Wallet>) {
-        val walletsNames = walletsList.map { it.walletName }
-        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, walletsNames)
+    private fun initSpinners() {
+        spinner_wallet.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) { }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                walletInstance = presenter.getWalletByIndex(index)
+            }
+        }
+
+        spinner_category.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) { }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                //because I inserted first element
+                if(index != 0) categoryInstance = presenter.getCategoryByIndex(index - 1)
+            }
+        }
+
+    }
+
+    override fun onWalletListLoaded(walletNamesList: List<String>) {
+        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, walletNamesList)
         spinner_wallet.adapter = tmpAdapter
+
+        if (walletId != ALL_WALLETS_ID) {
+            spinner_wallet.setSelection(presenter.getWalletIndexById(walletId))
+        } else {
+            spinner_wallet.setSelection(0)
+        }
+
     }
 
     override fun onCategoriesLoaded(categoriesList: List<MyCategory>) {
-        val categoriesNames = categoriesList.map { it.categoryName }
-        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, categoriesNames)
+        val categoriesNames = categoriesList.map { it.categoryName }.toMutableList()
+        categoriesNames.add(0, "Choose category")
+        val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, categoriesNames.toList())
         spinner_category.adapter = tmpAdapter
     }
 
@@ -126,7 +172,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     private fun hideKeyboard(view: View?) {
         if (view?.findFocus() != null) { //hide keyboard
             val viewFocus: View = view.findFocus()
-            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(viewFocus.windowToken, 0)
         }
     }
@@ -143,36 +189,43 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
         walletInstance = wallet
 
         tv_currency_sign.text = wallet.money.currency.sign.toString()
-        //todo: set spinner
     }
 
 
     private fun saveOperation() {
-        //todo: get category from view
+        val thisOperationTypeName = figureOperationType(operationType)
+        val thisOperationPeriod = if (number_of_days_to_repeat.text.toString() != "")
+            number_of_days_to_repeat.text.toString().toInt() else 0
 
         val opToSave = Operation(
-                type = OperationType.valueOf(operationType),
+                type = OperationType.valueOf(thisOperationTypeName),
                 comment = et_operation_comment.text.toString(),
-                amountOperationCurrency = Money(et_amount.text.toString().toDouble(), walletInstance.money.currency),
+                amountOperationCurrency = Money(et_amount.text.toString().toDouble(), walletInstance!!.money.currency),
                 amountMainCurrency = Money(0.0, MyCurrency.USD),
-                wallet = walletInstance, category = MyCategory(1, "groceries", "category_groceries"),
+                wallet = walletInstance!!,
+                category = categoryInstance!!,
                 datetime = Date(),
-                periodSeconds = 0
+                periodSeconds = thisOperationPeriod
         )
         presenter.saveOperation(opToSave)
     }
 
-    override fun onWalletLoadedError() {
-
+    private fun figureOperationType(opTypeName: String): String {
+        if (number_of_days_to_repeat.text.toString() != "") {
+            if (opTypeName == OperationType.INCOME.name)
+                return OperationType.PENDING_INCOME.name
+            return if (opTypeName == OperationType.OUTCOME.name) {
+                OperationType.PENDING_OUTCOME.name
+            } else {
+                opTypeName
+            }
+        } else { return opTypeName }
     }
+
+    override fun onWalletLoadedError() { }
 
     interface OnChooseWalletInteractionListener {
         fun onChooseWalletInteraction(item: Wallet)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        chooseWalletListener = null
     }
 
     companion object {

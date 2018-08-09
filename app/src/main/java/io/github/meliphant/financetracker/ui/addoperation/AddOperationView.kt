@@ -9,7 +9,7 @@ interface AddOperationView: MvpView {
     fun onOperationSaved()
     fun onWalletLoaded(wallet: Wallet)
     fun onWalletLoadedError()
-    fun onWalletListLoaded(list: List<Wallet>)
+    fun onWalletListLoaded(list: List<String>)
 
     fun onCategoriesLoaded(categoriesList: List<MyCategory>)
 }

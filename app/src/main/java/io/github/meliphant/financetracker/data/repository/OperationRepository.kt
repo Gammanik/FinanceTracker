@@ -52,7 +52,10 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
             if (periodicOperation.datetime <= now) {
 
                 //todo: fix periodic op datetime
-                val count = (now.time - periodicOperation.datetime.time) / (periodicOperation.periodSeconds * SECONDS_IN_DAY)
+                var count = 0L
+                if (periodicOperation.periodSeconds > 0)  //checking just in case
+                    count = (now.time - periodicOperation.datetime.time) / (periodicOperation.periodSeconds * SECONDS_IN_DAY)
+
                 for (i in 0 until count) {
 
                     val normOp = fromPeriodicToNormalOperation(periodicOperation)

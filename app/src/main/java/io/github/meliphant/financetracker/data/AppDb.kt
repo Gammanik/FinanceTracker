@@ -43,12 +43,12 @@ abstract class AppDb: RoomDatabase() {
 
                         launch {
 
-                            val wall1 = Wallet(1, "tstWall1-USD", Money(0.0, MyCurrency.USD), "wallet_wlcard")
-                            val wall2 = Wallet(2, "wl2-RUB", Money(0.0, MyCurrency.RUB), "wallet_wlcash")
+                            val wall1 = Wallet(1, "Tinkoff-USD", Money(0.0, MyCurrency.USD), "wallet_wlcard")
+                            val wall2 = Wallet(2, "Tinkoff-RUB", Money(0.0, MyCurrency.RUB), "wallet_wlcash")
                             val walletsList = mutableListOf<Wallet>(wall1, wall2)
 
                             for (i in 3..10) {
-                                walletsList.add(Wallet(i, "wl$i", Money(0.0, MyCurrency.RUB), "wallet_wlcard"))
+                                walletsList.add(Wallet(i, "wallet$i", Money(0.0, MyCurrency.RUB), "wallet_wlcard"))
                             }
                             //todo: fix problem with first launch no wallets are shown
                             getInstance(context).walletDao().saveWalletList(walletsList)

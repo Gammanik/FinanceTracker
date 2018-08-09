@@ -2,8 +2,10 @@ package io.github.meliphant.financetracker.ui.addoperation
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import io.github.meliphant.financetracker.ALL_WALLETS_ID
 import io.github.meliphant.financetracker.data.MainInteractor
 import io.github.meliphant.financetracker.data.model.IdleOperation
+import io.github.meliphant.financetracker.data.model.MyCategory
 import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.Wallet
 import kotlinx.coroutines.experimental.android.UI
@@ -14,20 +16,14 @@ import javax.inject.Inject
 @InjectViewState
 class AddOperationPresenter @Inject constructor(private val interactor: MainInteractor): MvpPresenter<AddOperationView>() {
 
-    //todo: add mapper on repository
+    private var walletsList: List<Wallet>? = null
+    private var categoryList: List<MyCategory>? = null
+
     fun saveOperation(op: Operation) {
         launch {
             interactor.saveOperation(op)
             launch(UI) { viewState.onOperationSaved() }
         }
-    }
-
-    //todo: shouldn't be here
-    fun saveWallet(wallet: Wallet) {
-        launch { interactor.saveWallet(wallet)
-            launch(UI) { viewState.onOperationSaved() }
-        }
-
     }
 
     fun loadWalletById(walletId: Int) {
@@ -42,15 +38,31 @@ class AddOperationPresenter @Inject constructor(private val interactor: MainInte
         }
     }
 
+    fun getWalletByIndex(index: Int): Wallet? {
+        return walletsList?.get(index)
+    }
+
+    fun getWalletIndexById(walletId: Int): Int {
+        return if (walletsList != null) {
+            walletsList!!.indexOf(walletsList!!.find { it.walletId == walletId })
+        } else {
+            0
+        }
+    }
+
+    fun getCategoryByIndex(index: Int): MyCategory? {
+        return categoryList?.get(index)
+    }
+
     fun loadAllWallets() {
-        launch { val walletsList = interactor.getAllWallets()
-            launch(UI) { viewState.onWalletListLoaded(walletsList) }
+        launch { walletsList = interactor.getAllWallets()
+            launch(UI) { viewState.onWalletListLoaded(walletsList!!.map { it.walletName }) }
         }
     }
 
     fun loadAllCategories() {
-        launch { val categories = interactor.getAllCategories()
-            launch(UI) { viewState.onCategoriesLoaded(categories) }
+        launch { categoryList = interactor.getAllCategories()
+            launch(UI) { viewState.onCategoriesLoaded(categoryList!!) }
         }
     }
 }
