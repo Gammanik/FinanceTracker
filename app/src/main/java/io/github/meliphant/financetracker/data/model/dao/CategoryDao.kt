@@ -20,9 +20,8 @@ interface CategoryDao {
 
     //todo: is there a way to do it for all categories through SQL and return List<CategorySpend> then?
 //    https://www.w3resource.com/sql/aggregate-functions/sum-with-group-by.php
-//    @Query("""SELECT MyCategory.*, SUM(idleoperation.amountOp_amount) amount
-//        FROM idleoperation
-//        INNER JOIN mycategory ON IdleOperation.categoryId = MyCategory.categoryId
-//        WHERE walletId=:walletId GROUP BY MyCategory.categoryId""")
-//    fun getCategorySpent(walletId: Int): List<CategorySpend>
+    @Query("""SELECT MyCategory.*, SUM(idleoperation.amountOp_amount) amount FROM idleoperation
+        INNER JOIN mycategory ON IdleOperation.categoryId = MyCategory.categoryId
+        WHERE walletId=:walletId GROUP BY MyCategory.categoryId""")
+    fun getCategorySpent(walletId: Int): List<CategorySpend>
 }

@@ -73,8 +73,14 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
 
 fun fromPeriodicToNormalOperation(periodicOp: Operation): Operation {
     //doing this just for autogenerating operationId
+    var opType = periodicOp.type
+    if (periodicOp.type == OperationType.PENDING_OUTCOME)
+        opType = OperationType.OUTCOME
+    if (periodicOp.type == OperationType.PENDING_INCOME)
+        opType = OperationType.INCOME
+
     return Operation(
-            type = periodicOp.type,
+            type = opType,
             comment = periodicOp.comment,
             amountOperationCurrency = periodicOp.amountOperationCurrency,
             amountMainCurrency = periodicOp.amountMainCurrency,

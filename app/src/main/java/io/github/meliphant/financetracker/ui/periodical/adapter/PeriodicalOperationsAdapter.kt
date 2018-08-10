@@ -2,6 +2,7 @@ package io.github.meliphant.financetracker.ui.periodical.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.meliphant.financetracker.R
@@ -28,10 +29,10 @@ class PeriodicalOperationsAdapter(private var mValues: List<Operation>?)
 
         holder.opAmount.text = "${item.amountOperationCurrency.amount}${item?.wallet.money.currency.sign}"
 
-        if (item.type == OperationType.INCOME) {
+        if (item.type == OperationType.PENDING_INCOME) {
             holder.opAmount.setTextColor(holder.mView.resources.getColor(R.color.colorWalletAmount))
         }
-        if (item.type == OperationType.OUTCOME) {
+        if (item.type == OperationType.PENDING_OUTCOME) {
             holder.opAmount.setTextColor(holder.mView.resources.getColor(R.color.colorSpending))
         }
 
@@ -66,6 +67,8 @@ class PeriodicalOperationsAdapter(private var mValues: List<Operation>?)
 
 
     fun setData(data: List<Operation>) {
+        Log.e("Tg", "periodicalop data: $data")
+        mValues = null
         mValues = data
         notifyDataSetChanged()
     }

@@ -103,7 +103,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
     private fun initSaveOperationButton() {
         btn_save_operation.visibility = View.INVISIBLE
         btn_save_operation.setOnClickListener {
-            if (walletInstance != null) {
+            if (categoryInstance != null) {
                 saveOperation()
             } else {
                 Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
@@ -158,7 +158,7 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
 
     override fun onCategoriesLoaded(categoriesList: List<MyCategory>) {
         val categoriesNames = categoriesList.map { it.categoryName }.toMutableList()
-        categoriesNames.add(0, "Choose category")
+        categoriesNames.add(0, "~choose category~")
         val tmpAdapter = ArrayAdapter<CharSequence>(activity, R.layout.support_simple_spinner_dropdown_item, categoriesNames.toList())
         spinner_category.adapter = tmpAdapter
     }

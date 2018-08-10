@@ -19,4 +19,7 @@
     <string name="new_periodical_income">Новый периодический доход</string>
     <string name="new_periodical_expense">Новый периодический расход</string>
 
+
+    <string name="pie_chart_description">Your spending by category</string>
+
 </resources>

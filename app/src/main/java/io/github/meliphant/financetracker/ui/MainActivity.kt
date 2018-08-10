@@ -32,16 +32,13 @@ class MainActivity : AppCompatActivity(){
                         .commitAllowingStateLoss()
                 1 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, PeriodicalOperationsFragment())
                         .commitAllowingStateLoss()
-                2 ->  supportFragmentManager.beginTransaction().replace(R.id.fl_main, MyWalletsFragment())
-                            .commitAllowingStateLoss()
-                3 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, DiagramFragment())
+                2 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, DiagramFragment())
                         .commitAllowingStateLoss()
 
             }
             true
         }
 
-//        bottomNavigation.titleState =
         bottomNavigation.accentColor = Color.BLACK
         bottomNavigation.currentItem = 0
         bottomNavigation.isBehaviorTranslationEnabled = true

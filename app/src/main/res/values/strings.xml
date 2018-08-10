@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Finance Tracker</string>
 
-    <!---->
+    <!--op list-->
     <string name="new_income">new income</string>
     <string name="new_expense">new expense</string>
     <string name="new_operation_from_template">new operation from template</string>
@@ -20,6 +20,9 @@
     <!--my wallets screen-->
     <string name="default_value_text">Default value: </string>
     <string name="action_settings">Settings</string>
+    
+    <!--diagram screen-->
+    <string name="pie_chart_description">Your spending by category</string>
 
 
 </resources>

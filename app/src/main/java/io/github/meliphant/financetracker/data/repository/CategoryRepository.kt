@@ -13,10 +13,6 @@ class CategoryRepository @Inject constructor(private val operationDao: Operation
     }
 
     fun getAllCategoriesSpend(walletId: Int): List<CategorySpend> {
-        return listOf(CategorySpend(MyCategory(0, "somename", "someUrl"), 1600),
-                CategorySpend(MyCategory(1, "somename1", "someUrl1"), 1450)
-        )
-        //todo: make real query instead of mock
-//        return categoryDao.getCategorySpent(walletId)
+        return categoryDao.getCategorySpent(walletId)
     }
 }
