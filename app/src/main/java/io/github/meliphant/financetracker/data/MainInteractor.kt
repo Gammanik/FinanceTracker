@@ -18,11 +18,15 @@ class MainInteractor @Inject constructor(private val opRepo: OperationRepository
     }
 
     fun getAllOperations(): List<Operation> {
-        return  opRepo.getAllOperations()
+        return opRepo.getAllOperations()
     }
 
     fun getOperationsByWalletId(walletId: Int): List<Operation> {
         return opRepo.getOperationsByWalletId(walletId)
+    }
+
+    fun getTemplates(): List<Operation> {
+        return opRepo.getTemplates()
     }
 
     /** wallets **/

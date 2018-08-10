@@ -128,7 +128,7 @@ abstract class AppDb: RoomDatabase() {
                     amountMainCurrency = Money(2345.0, MyCurrency.RUB),
                     wallet = wl2,
                     datetime = Date(),
-                    category = catList[5],
+                    category = catList[4],
                     type = OperationType.PENDING_OUTCOME,
                     periodSeconds = 30)
 
@@ -137,7 +137,7 @@ abstract class AppDb: RoomDatabase() {
                     amountMainCurrency = Money(6500.0, MyCurrency.USD),
                     wallet = wl1,
                     datetime = Date(),
-                    category = catList[5],
+                    category = catList[2],
                     type = OperationType.PENDING_INCOME,
                     periodSeconds = 15)
 

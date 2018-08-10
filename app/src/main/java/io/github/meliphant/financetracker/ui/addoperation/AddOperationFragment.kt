@@ -207,7 +207,16 @@ class AddOperationFragment : MvpAppCompatFragment(), AddOperationView {
                 datetime = Date(),
                 periodSeconds = thisOperationPeriod
         )
+
+        if (cb_is_template.isChecked) {
+            saveTemplate(opToSave)
+        }
         presenter.saveOperation(opToSave)
+    }
+
+    private fun saveTemplate(op: Operation) {
+        val template = op.copy(type = OperationType.TEMPLATE)
+        presenter.saveOperation(template)
     }
 
     private fun figureOperationType(opTypeName: String): String {

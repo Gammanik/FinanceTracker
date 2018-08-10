@@ -20,6 +20,9 @@
     <string name="new_periodical_expense">Новый периодический расход</string>
 
 
-    <string name="pie_chart_description">Your spending by category</string>
+    <string name="pie_chart_description">~Ваши траты по категориям</string>
+    <string name="pie_chart_choose_wallet_text">Выберите кошелек: </string>
+    <string name="save_as_template">Сохранить как шаблон</string>
+
 
 </resources>

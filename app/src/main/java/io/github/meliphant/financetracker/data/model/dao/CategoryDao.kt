@@ -22,6 +22,6 @@ interface CategoryDao {
 //    https://www.w3resource.com/sql/aggregate-functions/sum-with-group-by.php
     @Query("""SELECT MyCategory.*, SUM(idleoperation.amountOp_amount) amount FROM idleoperation
         INNER JOIN mycategory ON IdleOperation.categoryId = MyCategory.categoryId
-        WHERE walletId=:walletId GROUP BY MyCategory.categoryId""")
+        WHERE walletId=:walletId AND idleoperation.type = 'OUTCOME' GROUP BY MyCategory.categoryId""")
     fun getCategorySpent(walletId: Int): List<CategorySpend>
 }

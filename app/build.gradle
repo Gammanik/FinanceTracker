@@ -87,6 +87,9 @@ dependencies {
     def chartLibVer = "v3.0.3"
     implementation "com.github.PhilJay:MPAndroidChart:$chartLibVer"
 
+    def dateTimePickerVer = "v0.3.3"
+    implementation "com.github.BlackBoxVision:datetimepicker-edittext:$dateTimePickerVer"
+
     //test
     def junit = '4.12'
     testImplementation "junit:junit:$junit"

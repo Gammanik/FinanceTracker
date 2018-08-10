@@ -2,7 +2,6 @@ package io.github.meliphant.financetracker.ui.periodical.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.meliphant.financetracker.R
@@ -67,7 +66,6 @@ class PeriodicalOperationsAdapter(private var mValues: List<Operation>?)
 
 
     fun setData(data: List<Operation>) {
-        Log.e("Tg", "periodicalop data: $data")
         mValues = null
         mValues = data
         notifyDataSetChanged()

@@ -16,4 +16,11 @@ class DiagramPresenter @Inject constructor(private val interactor: MainInteracto
             launch(UI) { viewState.showDiagramForWallet(data)}
         }
     }
+
+    fun loadWalletList() {
+        launch {
+            val data = interactor.getAllWallets()
+            launch(UI) { viewState.onWalletListLoaded(data)}
+        }
+    }
 }
