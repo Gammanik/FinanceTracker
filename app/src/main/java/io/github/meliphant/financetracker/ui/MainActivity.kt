@@ -8,6 +8,7 @@ import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.ui.diagram.DiagramFragment
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsFragment
+import io.github.meliphant.financetracker.ui.settings.SettingsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(){
                 1 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, PeriodicalOperationsFragment())
                         .commitAllowingStateLoss()
                 2 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, DiagramFragment())
+                        .commitAllowingStateLoss()
+                3 -> supportFragmentManager.beginTransaction().replace(R.id.fl_main, SettingsFragment())
                         .commitAllowingStateLoss()
 
             }

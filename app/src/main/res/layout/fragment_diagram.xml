@@ -23,6 +23,7 @@
         android:layout_height="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,40 +36,15 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_wallet"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_wallet_piechart"
         app:layout_constraintVertical_bias="0.741">
 
     </com.github.mikephil.charting.charts.PieChart>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/date_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        app:hintAnimationEnabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/pie_chart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_wallet_piechart">
-
-        <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-            android:id="@+id/date_to_input_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:focusableInTouchMode="true"
-            android:gravity="center"
-            app:is24HourView="true" />
-
-    </android.support.design.widget.TextInputLayout>
 
 
 </android.support.constraint.ConstraintLayout>
