@@ -39,7 +39,9 @@ class DiagramFragment: MvpAppCompatFragment(), DiagramView {
     override fun showDiagramForWallet(data: List<CategorySpend>) {
         Log.e("tg", "data got: $data")
 
-        val pieEntries = data.sortedBy { it.amount }.mapIndexed { index, fl -> PieEntry(fl.amount.toFloat(), index) }
+        val pieEntries = data.sortedBy { it.amount }
+                .mapIndexed { index, catSpend -> PieEntry(catSpend.amount.toFloat(), catSpend.myCategory.categoryName) }
+        
         val pieDataSet: PieDataSet = PieDataSet(pieEntries, "Spent by category")
         pieDataSet.colors = ColorTemplate.LIBERTY_COLORS.toList()
         pieDataSet.sliceSpace = 3f

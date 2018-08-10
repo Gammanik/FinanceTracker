@@ -56,10 +56,19 @@ abstract class AppDb: RoomDatabase() {
                             val categoryGroceries = MyCategory(1, "Groceries", "category_groceries")
                             val categoryFreelance = MyCategory(2, "Freelance", "category_freelance")
                             val categorySalary = MyCategory(3, "Salary", "category_salary")
-                            val categoryList= listOf(categoryGroceries, categoryFreelance, categorySalary)
+                            val catHome = MyCategory(4, "Home", "category_home")
+                            val catInternet = MyCategory(5, "Internet", "category_internet")
+                            val catRestaurant = MyCategory(6, "Restaurant", "category_restaurant")
+                            val catShopping = MyCategory(7, "Shopping", "category_shopping")
+                            val catTaxi = MyCategory(8, "Taxi", "category_taxi")
+                            val catTransport = MyCategory(9, "Transport", "category_transport")
+                            val catTravel = MyCategory(10, "Travel", "category_travel")
+
+                            val categoryList= listOf(categoryGroceries, categoryFreelance, categorySalary, catHome, catInternet,
+                                    catRestaurant, catShopping, catTaxi, catTransport, catTravel)
                             getInstance(context).categoryDao().saveCategoryList(categoryList)
 
-                            saveOperations(context, wall1, categoryFreelance, wall2, categorySalary, categoryGroceries)
+                            saveOperations(context, wall1, wall2, categoryList)
                         }
                     }
                 })
@@ -69,20 +78,22 @@ abstract class AppDb: RoomDatabase() {
             return INSTANCE as AppDb
         }
 
+//        private fun getCategories
 
-        private fun saveOperations(context: Context, wl1: Wallet, cat1: MyCategory, wl2: Wallet, cat2: MyCategory, cat3: MyCategory) {
+
+        private fun saveOperations(context: Context, wl1: Wallet, wl2: Wallet, catList: List<MyCategory>) {
             val op1 = Operation( comment = "earned on freelance",
                     amountOperationCurrency = Money(6000.0, MyCurrency.RUB),
                     amountMainCurrency = Money(6000.0/60, MyCurrency.USD),
                     wallet = wl1, datetime = Date(),
-                    category = cat1,
+                    category = catList[0],
                     type = OperationType.INCOME,
                     periodSeconds = 0)
 
             val op2 = Operation( comment = "got my salary", amountOperationCurrency = Money(7700.0, MyCurrency.USD),
                     amountMainCurrency = Money(7700.0, MyCurrency.USD),
                     wallet = wl2, datetime = Date(),
-                    category = cat2, type = OperationType.INCOME,
+                    category = catList[1], type = OperationType.INCOME,
                     periodSeconds = 0)
 
             val op3 = Operation( comment = "bough some food",
@@ -90,17 +101,58 @@ abstract class AppDb: RoomDatabase() {
                     amountMainCurrency = Money(5300.0, MyCurrency.USD),
                     wallet = wl2,
                     datetime = Date(),
-                    category = cat3,
+                    category = catList[2],
                     type = OperationType.OUTCOME,
                     periodSeconds = 0)
 
+            val op4 = Operation( comment = "pay rent",
+                    amountOperationCurrency = Money(2345.0, MyCurrency.USD),
+                    amountMainCurrency = Money(2345.0, MyCurrency.USD),
+                    wallet = wl2,
+                    datetime = Date(),
+                    category = catList[4],
+                    type = OperationType.OUTCOME,
+                    periodSeconds = 0)
+
+            val op5 = Operation( comment = "go shopping",
+                    amountOperationCurrency = Money(2000.0, MyCurrency.USD),
+                    amountMainCurrency = Money(2000.0, MyCurrency.USD),
+                    wallet = wl2,
+                    datetime = Date(),
+                    category = catList[5],
+                    type = OperationType.OUTCOME,
+                    periodSeconds = 0)
+
+            val pendingOp1 = Operation( comment = "pay internet",
+                    amountOperationCurrency = Money(1500.0, MyCurrency.RUB),
+                    amountMainCurrency = Money(2345.0, MyCurrency.RUB),
+                    wallet = wl2,
+                    datetime = Date(),
+                    category = catList[5],
+                    type = OperationType.PENDING_OUTCOME,
+                    periodSeconds = 30)
+
+            val pendingOp2 = Operation( comment = "salary",
+                    amountOperationCurrency = Money(6500.0, MyCurrency.USD),
+                    amountMainCurrency = Money(6500.0, MyCurrency.USD),
+                    wallet = wl1,
+                    datetime = Date(),
+                    category = catList[5],
+                    type = OperationType.PENDING_INCOME,
+                    periodSeconds = 15)
+
+
             val opRepository = OperationRepository(getInstance(context).operationDao(), getInstance(context).walletOperationDao())
+            opRepository.saveOperation(pendingOp1)
+            opRepository.saveOperation(pendingOp2)
 
             for (i in 0..15)
                 opRepository.saveOperation(op1)
+                opRepository.saveOperation(op5)
 
             for (i in 0..20) {
                 opRepository.saveOperation(op2)
+                opRepository.saveOperation(op4)
                 opRepository.saveOperation(op3)
             }
         }

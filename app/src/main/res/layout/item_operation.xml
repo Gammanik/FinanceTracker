@@ -16,17 +16,17 @@
             android:id="@+id/op_datetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/op_category_img"
             android:layout_alignStart="@+id/op_comment"
-            android:layout_alignTop="@+id/op_category_img"
             android:text="15:03 19.09.1996" />
 
         <ImageView
             android:id="@+id/op_category_img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="12dp"
             android:contentDescription="operation description"
             app:srcCompat="@drawable/category_freelance" />
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/op_category_img"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="79dp"
+            android:layout_marginStart="67dp"
             android:lines="1"
             android:maxWidth="180dp"
             android:text="some operation"
