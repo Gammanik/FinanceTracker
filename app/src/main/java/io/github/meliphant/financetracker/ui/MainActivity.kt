@@ -8,7 +8,6 @@ import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.ui.diagram.DiagramFragment
 import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
 import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsFragment
-import io.github.meliphant.financetracker.ui.settings.SettingsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
