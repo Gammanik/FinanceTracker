@@ -18,13 +18,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun operationTypeFromOrdinal(value: Int?): OperationType? {
-        return if (value == null) null else OperationType.values()[value]
+    fun operationTypeFromOrdinal(value: String?): OperationType? {
+        return if (value == null) null else OperationType.valueOf(value)
     }
 
     @TypeConverter
-    fun operationTypeToOrdinal(operationType: OperationType?): Int? {
-        return operationType?.ordinal
+    fun operationTypeToOrdinal(operationType: OperationType?): String? {
+        return operationType?.name
     }
 
 

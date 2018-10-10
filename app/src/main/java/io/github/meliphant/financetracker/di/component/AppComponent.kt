@@ -6,8 +6,16 @@ import io.github.meliphant.financetracker.di.module.AppModule
 import io.github.meliphant.financetracker.di.module.DbModule
 import io.github.meliphant.financetracker.ui.addoperation.AddOperationFragment
 import io.github.meliphant.financetracker.ui.addoperation.AddOperationPresenter
+import io.github.meliphant.financetracker.ui.diagram.DiagramFragment
+import io.github.meliphant.financetracker.ui.diagram.DiagramPresenter
+import io.github.meliphant.financetracker.ui.mywallets.MyWalletsFragment
+import io.github.meliphant.financetracker.ui.mywallets.MyWalletsPresenter
 import io.github.meliphant.financetracker.ui.operations.OperationListFragment
 import io.github.meliphant.financetracker.ui.operations.OperationListPresenter
+import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsFragment
+import io.github.meliphant.financetracker.ui.periodical.PeriodicalOperationsPresenter
+import io.github.meliphant.financetracker.ui.templates.TemplatesFragment
+import io.github.meliphant.financetracker.ui.templates.TemplatesPresenter
 import io.github.meliphant.financetracker.ui.wallets.WalletsFragment
 import io.github.meliphant.financetracker.ui.wallets.WalletsPresenter
 import javax.inject.Singleton
@@ -25,4 +33,16 @@ interface AppComponent {
 
     fun inject(walletsFragment: WalletsFragment)
     fun inject(walletsPresenter: WalletsPresenter)
+
+    fun inject(myWalletsFragment: MyWalletsFragment)
+    fun inject(myWalletsPresenter: MyWalletsPresenter)
+
+    fun inject(diagramFragment: DiagramFragment)
+    fun inject(diagramPresenter: DiagramPresenter)
+
+    fun inject(periodicalOperationsFragment: PeriodicalOperationsFragment)
+    fun inject(periodicalOperationsPresenter: PeriodicalOperationsPresenter)
+
+    fun inject(templatesFragment: TemplatesFragment)
+    fun inject(templatesPresenter: TemplatesPresenter)
 }

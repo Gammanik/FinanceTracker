@@ -1,0 +1,22 @@
+package io.github.meliphant.financetracker.ui.addwallet
+
+
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
+
+import io.github.meliphant.financetracker.R
+
+
+class AddWalletFragment : MvpAppCompatFragment(), AddWalletView {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_add_wallet, container, false)
+    }
+
+
+}

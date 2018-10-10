@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:context=".ui.operations.OperationListFragment"
-        tools:listitem="@layout/fragment_operation" />
+        tools:listitem="@layout/item_operation" />
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/fab_menu"
@@ -20,11 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="6dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
             app:fab_labelStyle="@style/menu_labels_style"
-            app:fab_colorNormal="@color/colorPrimary"
-            app:fab_colorPressed="@color/cardview_shadow_end_color"
+            app:fab_addButtonColorNormal="@color/colorPrimaryDark"
+            app:fab_addButtonColorPressed="@color/fab_text_background"
+            app:fab_addButtonPlusIconColor="@color/fab_text_background"
             app:layout_anchor="@id/rv_operations"
             app:fab_icon="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="@+id/rv_operations"
@@ -35,11 +36,22 @@
             app:layout_constraintVertical_bias="1.0" >
 
             <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_new_template"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_icon="@drawable/fab_from_template"
+                app:fab_size="mini"
+                app:fab_title="@string/new_operation_from_template" />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_new_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:fab_colorNormal="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_addButtonPlusIconColor="@color/fab_text_background"
                 app:fab_icon="@drawable/ic_add"
                 app:fab_size="mini"
                 app:fab_title="@string/new_income" />
@@ -49,10 +61,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:fab_colorNormal="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimaryDark"
                 app:fab_icon="@drawable/ic_remove"
                 app:fab_size="mini"
                 app:fab_title="@string/new_expense" />
+
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.constraint.ConstraintLayout>

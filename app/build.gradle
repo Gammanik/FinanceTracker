@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword 'Potolok2'
+            storeFile file('/Users/Nikita/Dropbox/keystore_android_final')
+            storePassword 'Potolok2'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "io.github.meliphant.financetracker"
@@ -20,8 +28,11 @@ android {
         }
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            debuggable true
+            signingConfig signingConfigs.config
+            proguardFile '/Users/Nikita/Dropbox/git/FinanceTracker/app/proguard-rules.pro'
         }
     }
 }
@@ -32,56 +43,52 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_lib"
     implementation "com.android.support:design:$support_lib"
     implementation "com.android.support:support-v4:$support_lib"
-    implementation "com.android.support:recyclerview-v7:27.1.1"
-
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     def retrofit = '2.4.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-
     def rxjava = '2.1.8'
     def rxandroid = '2.0.1'
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
-
     def custom_radio_buttons = 'v2.1.1'
     implementation "com.android.support:recyclerview-v7:$support_lib"
     implementation "com.github.ceryle:RadioRealButton:$custom_radio_buttons"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation "com.android.support:cardview-v7:$support_lib"
-
     def roomVer = "1.1.1"
+    implementation 'com.android.support:support-v4:27.1.1'
     kapt "android.arch.persistence.room:compiler:$roomVer"
     implementation "android.arch.persistence.room:runtime:$roomVer"
-
     def coroutinesVer = "0.24.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVer"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVer"
-
     def daggerVer = "2.12"
     kapt "com.google.dagger:dagger-compiler:$daggerVer"
     implementation "com.google.dagger:dagger:$daggerVer"
-
     def circleImageViewVer = "2.2.0"
     implementation "de.hdodenhof:circleimageview:$circleImageViewVer"
-
     def glideVer = "4.7.1"
     implementation "com.github.bumptech.glide:glide:$glideVer"
     kapt "com.github.bumptech.glide:compiler:$glideVer"
-
     def moxyVer = "1.5.5"
     implementation "com.arello-mobile:moxy-app-compat:$moxyVer"
     kapt "com.arello-mobile:moxy-compiler:$moxyVer"
     implementation "com.android.support:appcompat-v7:$support_lib"
-
     def materialEditTextVer = "2.1.4"
     implementation "com.rengwuxian.materialedittext:library:$materialEditTextVer"
-
     def recyclerTabLayoutVer = "1.5.0"
     implementation "com.nshmura:recyclertablayout:$recyclerTabLayoutVer"
-
     def fabVer = "1.10.1"
     implementation "com.getbase:floatingactionbutton:$fabVer"
+    def ahBottomNavVer = "2.1.0"
+    implementation "com.aurelhubert:ahbottomnavigation:$ahBottomNavVer"
+    def chartLibVer = "v3.0.3"
+    implementation "com.github.PhilJay:MPAndroidChart:$chartLibVer"
+
+    def dateTimePickerVer = "v0.3.3"
+    implementation "com.github.BlackBoxVision:datetimepicker-edittext:$dateTimePickerVer"
 
     //test
     def junit = '4.12'

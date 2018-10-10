@@ -17,6 +17,5 @@ data class Operation(
         @Embedded val wallet: Wallet,
         @Embedded val category: MyCategory,
         var datetime: Date,
-        val isPeriodic: Boolean = false,
         val periodSeconds: Int
 )

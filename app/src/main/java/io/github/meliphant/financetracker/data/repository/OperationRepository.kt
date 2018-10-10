@@ -25,9 +25,17 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
         return operationDao.getAll()
     }
 
-    fun getOperations(walletId: Int): List<Operation> {
+    fun getOperationsByWalletId(walletId: Int): List<Operation> {
         handlePeriodicOperations()
         return operationDao.getByWalletId(walletId)
+    }
+
+    fun getTemplates(): List<Operation> {
+        return operationDao.getAllTemplates()
+    }
+
+    fun getAllPeriodicOperations(): List<Operation> {
+        return operationDao.getAllPeriodic()
     }
 
     private fun changeWalletBalance(op: Operation): Operation {
@@ -48,7 +56,10 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
             if (periodicOperation.datetime <= now) {
 
                 //todo: fix periodic op datetime
-                val count = (now.time - periodicOperation.datetime.time) / (periodicOperation.periodSeconds * SECONDS_IN_DAY)
+                var count = 0L
+                if (periodicOperation.periodSeconds > 0)  //checking just in case
+                    count = (now.time - periodicOperation.datetime.time) / (periodicOperation.periodSeconds * SECONDS_IN_DAY)
+
                 for (i in 0 until count) {
 
                     val normOp = fromPeriodicToNormalOperation(periodicOperation)
@@ -66,15 +77,20 @@ class OperationRepository @Inject constructor(private val operationDao: Operatio
 
 fun fromPeriodicToNormalOperation(periodicOp: Operation): Operation {
     //doing this just for autogenerating operationId
+    var opType = periodicOp.type
+    if (periodicOp.type == OperationType.PENDING_OUTCOME)
+        opType = OperationType.OUTCOME
+    if (periodicOp.type == OperationType.PENDING_INCOME)
+        opType = OperationType.INCOME
+
     return Operation(
-            type = periodicOp.type,
+            type = opType,
             comment = periodicOp.comment,
             amountOperationCurrency = periodicOp.amountOperationCurrency,
             amountMainCurrency = periodicOp.amountMainCurrency,
             wallet = periodicOp.wallet,
             category = periodicOp.category,
             datetime = periodicOp.datetime,
-            isPeriodic = false,
             periodSeconds = 0
     )
 }
@@ -90,9 +106,8 @@ object OperationMapper {
         val amountCurrencyOperation = operation.amountOperationCurrency
         val date = operation.datetime
         val categoryId = operation.category.categoryId
-        val isPeriodic = operation.isPeriodic
         val periodSeconds = operation.periodSeconds
 
-        return IdleOperation(id, opType, comment, amountCurrencyOperation, amountCurrencyMain, walletId, categoryId, date, isPeriodic, periodSeconds)
+        return IdleOperation(id, opType, comment, amountCurrencyOperation, amountCurrencyMain, walletId, categoryId, date, periodSeconds)
     }
 }

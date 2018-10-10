@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.utils.OperationType
-import kotlinx.android.synthetic.main.fragment_operation.view.*
+import kotlinx.android.synthetic.main.item_operation.view.*
 import java.text.SimpleDateFormat
 
 
@@ -22,26 +22,26 @@ class OperationsAdapter(private val mValues: List<Operation>)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_operation, parent, false)
+                .inflate(R.layout.item_operation, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Operation = mValues[position]
         holder.opComment.text = item.comment
-        holder.opDateTime.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(item.datetime)
+        holder.opDateTime.text = SimpleDateFormat("HH:mm dd.MM.yyyy").format(item.datetime)
 
         Glide.with(holder.mView.context)
                 .load(getImage(holder.mView.context, item.category.categoryIconUrl))
                 .into(holder.opCategoryImg)
 
+        holder.opAmount.text = "${item.amountOperationCurrency.amount}${item.wallet.money.currency.sign}"
+
         if (item.type == OperationType.INCOME) {
-            holder.opAmount.text = "+ ${item.amountOperationCurrency.amount} ${item.wallet.money.currency.sign}"
-            holder.opAmount.setTextColor(Color.GREEN)
+            holder.opAmount.setTextColor(holder.mView.resources.getColor(R.color.colorWalletAmount))
         }
         if (item.type == OperationType.OUTCOME) {
-            holder.opAmount.text = "- ${item.amountOperationCurrency.amount} ${item.wallet.money.currency.sign}"
-            holder.opAmount.setTextColor(Color.RED)
+            holder.opAmount.setTextColor(holder.mView.resources.getColor(R.color.colorSpending))
         }
 
         Glide.with(holder.mView.context)

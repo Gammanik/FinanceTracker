@@ -2,21 +2,7 @@
 <resources>
     <string name="app_name">Finance Tracker</string>
     <string name="action_settings">Настройки</string>
-    <string name="action_about">О приложении</string>
-    <string name="hint_amount">Сумма</string>
-    <string name="outcome">РАСХОД</string>
-    <string name="income">ДОХОД</string>
-    <string name="cash">НАЛИЧНЫЕ</string>
-    <string name="card">КАРТА</string>
-    <string name="settings_currency_title">Валюта</string>
-    <string name="settings_currency_summary">Выберите одну валюту</string>
-    <string name="settings_currency_key">валюта</string>
-    <string name="msg_currency_error">Не удалось обновить курс валют, пожалуйста, попробуйте еще раз.</string>
-    <string name="account_title">Счет</string>
-    <string name="category_title">Категория</string>
-    <string name="close">Закрыть</string>
-    <string name="save">Сохранить</string>
-    <string name="transaction_empty_amount_warning">Пожалуйста, введи сумму.</string>
+
 
     <!--add transaction screen-->
     <string name="add_operation_screen_name">Новая транзакция</string>
@@ -25,5 +11,18 @@
     <string name="repeat_text">Повторять каждые </string>
     <string name="new_income">новый расход</string>
     <string name="new_expense">новых доход</string>
+    <string name="new_operation_from_template">новая операция из шаблонов</string>
+
+    <!--my wallets screen-->
+    <string name="default_value_text">Валюта по умолчанию: </string>
+    <string name="is_periodical">Периодическая операция</string>
+    <string name="new_periodical_income">Новый периодический доход</string>
+    <string name="new_periodical_expense">Новый периодический расход</string>
+
+
+    <string name="pie_chart_description">~Ваши траты по категориям</string>
+    <string name="pie_chart_choose_wallet_text">Выберите кошелек: </string>
+    <string name="save_as_template">Сохранить как шаблон</string>
+
 
 </resources>

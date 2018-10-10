@@ -2,20 +2,20 @@ package io.github.meliphant.financetracker.ui.operations
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import io.github.meliphant.financetracker.ui.operations.adapter.OperationsAdapter
 import io.github.meliphant.financetracker.Keys
 import io.github.meliphant.financetracker.R
 import io.github.meliphant.financetracker.data.model.Operation
 import io.github.meliphant.financetracker.data.model.utils.OperationType
 import io.github.meliphant.financetracker.di.component
 import io.github.meliphant.financetracker.ui.addoperation.AddOperationFragment
+import io.github.meliphant.financetracker.ui.operations.adapter.OperationsAdapter
+import io.github.meliphant.financetracker.ui.templates.TemplatesFragment
 import kotlinx.android.synthetic.main.fragment_operation_list.*
 import javax.inject.Inject
 
@@ -47,15 +47,24 @@ class OperationListFragment : MvpAppCompatFragment(), OperationListView {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun initFab() {
+    private fun initFab() {
         fab_new_income.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.INCOME))
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.INCOME, null))
+                    .addToBackStack("AddOperationFragment")
                     .commit()
         }
         fab_new_expense.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.OUTCOME))
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, AddOperationFragment.newInstance(walletId, OperationType.OUTCOME, null), null)
+                    .addToBackStack("AddOperationFragment")
+                    .commit()
+        }
+
+        fab_new_template.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, TemplatesFragment())
+                    .addToBackStack("TemplatesFragment")
                     .commit()
         }
 
